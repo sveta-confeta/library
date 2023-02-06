@@ -1,0 +1,15 @@
+
+.reviews li{
+  margin-bottom:42px;
+}
+
+@media(max-width:400px) {
+  .reviews li:nth-last-child{
+    margin-bottom:32px;
+  }
+  .reviews li:last-child{
+    margin-bottom:20px;
+  }
+
+
+}

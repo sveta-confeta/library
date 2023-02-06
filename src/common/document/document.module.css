@@ -1,0 +1,75 @@
+.termsWrapper{
+    max-width:1110px;
+    margin:-38px auto 0 auto;
+    grid-area: main;
+}
+.termsWrapper h2{
+    margin-bottom: 32px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+}
+.ol {
+    counter-reset:item;
+    margin-top: 16px !important;
+}
+.li:not(:last-child) {
+    display:block;
+    margin-bottom: 16px;
+}
+.li:before {
+    content:counters(item, '.') '. ';
+    counter-increment:item;
+}
+.termsSubTitleList{
+    margin-left:30px!important;
+}
+.termsTitle:not(:last-child){
+    font-weight:600;
+    font-size:16px;
+    margin-bottom:32px;
+}
+
+.termsSubTitle{
+    font-weight:400;
+    font-size:16px;
+    line-height:24px;
+}
+.termText{
+    margin-left: 60px !important;
+}
+.termSubText{
+    margin-left: 90px !important;
+}
+
+@media (max-width:1140px) {
+    .termsWrapper{
+        padding: 0 64px;
+    }
+}
+@media (max-width:1140px) {
+    .termsWrapper{
+        padding: 0 64px;
+    }
+}
+@media (max-width:650px) {
+    .termsWrapper{
+        padding: 0 16px;
+    }
+}
+@media (max-width:400px) {
+    .termsWrapper{
+        margin-bottom: -38px;
+    }
+    .termsWrapper h2{
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .termsSubTitle{
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+}

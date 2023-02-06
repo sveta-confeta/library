@@ -1,0 +1,249 @@
+.bookPage{
+  padding:0 0 42px 0;
+
+}
+.imgBook{
+  height:594px;
+}
+.bookPageContainer{
+  max-width:1110px;
+  margin:0 auto;
+}
+.btnBook{
+  padding:14px 96px;
+  width:350px;
+  font-size:15px;
+  letter-spacing:0.2px;
+  border-radius:30px;
+  margin-bottom:62px;
+
+}
+.bookWrapper{
+  display:flex;
+  gap:30px;
+  margin-bottom:42px;
+}
+.titleBook{
+  font-weight:700;
+  font-size:32px;
+  line-height:40px;
+  margin-bottom:24px;
+}
+.author{
+  font-weight:700;
+  font-size:18px;
+  line-height:28px;
+  color:#A7A7A7;
+  margin-bottom:32px;
+}
+.aboutTitle{
+  font-weight:700;
+  font-size:18px;
+  line-height:28px;
+  margin-bottom:32px;
+}
+.about{
+  font-weight:400;
+  font-size:16px;
+  line-height:24px;
+
+}
+.firstP{
+  margin-bottom:25px;
+
+}
+.titleSection{
+  font-weight:700;
+  font-size:18px;
+  line-height:28px;
+  padding-bottom:16px;
+  position:relative;
+  margin-bottom:16px;
+}
+.titleSection:after{
+  content:'' ;
+  position:absolute;
+  height:1px;
+  width:350px;
+  background-color:#EBEBEB;
+  bottom:0;
+  left:0;
+}
+.raitingSection{
+  margin-bottom:62px;
+}
+.mobShow{
+  display:none;
+}
+.reviews{
+  position:relative;
+}
+.reviews span{
+  position:absolute;
+  top:2px;
+  left:85px;
+  font-weight:400;
+  font-size:14px;
+  line-height:24px;
+  color:#A7A7A7;
+
+}
+.btnStyle{
+  padding:14px 0;
+  width:350px;
+  display:block;
+  font-weight:600;
+  font-size:16px;
+  line-height:24px;
+  border-radius:30px;
+}
+@media(max-width:1140px){
+  .bookPage{
+    padding:0  64px 42px 64px;
+  }
+
+}
+@media(max-width:940px){
+  .imgBook{
+    width:136px;
+    height:198px;
+
+  }
+
+}
+@media(max-width:768px){
+  .bookPage{
+    padding:0  64px 48px 64px;
+  }
+  .bookWrapper{
+    display:block;
+    margin-bottom:52px;
+  }
+  .imgBook{
+    float:left;
+    margin-right:32px;
+  }
+  .titleBook{
+    font-weight:700;
+    font-size:24px;
+    line-height:30px;
+
+  }
+  .author{
+    font-weight:600;
+    font-size:14px;
+    line-height:18px;
+  }
+  .btnBook {
+    padding:14px 73px;
+    width:306px;
+    margin-bottom:48px;
+  }
+  .aboutTitle{
+    font-weight:600;
+    font-size:16px;
+    line-height:24px;
+  }
+  .titleSection{
+    font-weight:600;
+    font-size:16px;
+    line-height:24px;
+  }
+  .raitingSection{
+    margin-bottom:54px;
+  }
+  .reviews span{
+    display:none;
+  }
+  .btnStyle {
+    width:100%;
+  }
+}
+@media(max-width:650px){
+  .bookPage{
+    padding:0  16px 48px 16px;
+  }
+}
+@media(max-width:500px){
+  .imgBook{
+    float:none;
+    width:188px;
+    height:260px;
+    margin:0 auto 16px auto;
+  }
+  .titleBook{
+    font-weight:700;
+    font-size:18px;
+    line-height:28px;
+    margin-bottom:8px;
+  }
+  .author{
+    font-weight:400;
+    font-size:12px;
+    margin-bottom:42px;
+  }
+  .titleSection{
+    font-weight:700;
+    font-size:18px;
+    line-height:28px;
+  }
+}
+@media(max-width:400px){
+  .btnBook{
+    width:100%;
+    font-weight:600;
+    font-size:12px;
+    line-height:18px;
+    padding-top:11px;
+    padding-bottom:11px;
+    margin-bottom:42px;
+  }
+  .aboutTitle{
+    font-weight:700;
+    font-size:18px;
+    line-height:28px;
+    margin-bottom:16px;
+  }
+  .about{
+    font-weight:400;
+    font-size:12px;
+    line-height:18px;
+  }
+  .bookWrapper{
+    margin-bottom:42px;
+  }
+  .bookRaiting{
+    gap:12px;
+
+  }
+  .mobHidden{
+    display:none;
+  }
+  .mobShow{
+    display:block;
+    position:relative;
+  }
+  .mobShow span{
+    font-weight:700;
+    font-size:18px;
+    line-height:28px;
+    margin-left:24px;
+    position:absolute;
+    top:4px;
+    left:211px
+
+  }
+  .bookPage{
+    padding-bottom:20px;
+  }
+  .btnStyle {
+    font-size:12px;
+    line-height:18px;
+    padding-top:11px;
+    padding-bottom:11px;
+  }
+}
+
+
+
+

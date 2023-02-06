@@ -1,0 +1,33 @@
+.mainPage {
+  display:grid;
+  padding:62px 0;
+  grid-template-areas:'sidebar settings'
+    'sidebar main';
+
+  grid-template-columns:279px 1fr;
+  grid-template-rows:38px max-content;
+  max-width:1110px;
+  margin:0 auto;
+    position: relative;
+
+}
+
+@media (max-width:1140px) {
+  .mainPage {
+    grid-template-areas:'settings'
+      'main';
+    grid-template-columns:1fr;
+
+  }
+}
+@media (max-width:900px) {
+  .mainPage {
+    padding-top:32px;
+  }
+}
+@media (max-width:700px) {
+  .mainPage {
+    padding-top:8px;
+  }
+}
+

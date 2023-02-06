@@ -1,0 +1,140 @@
+
+.settings{
+  display:flex;
+  justify-content:space-between;
+  grid-area:settings;
+}
+.group{
+  display:flex;
+  gap:16px;
+}
+.searchWrapper{
+  position:relative;
+}
+.search{
+  box-shadow:var(--shadow-btn);
+  border-radius:599px;
+  border:none;
+  width:350px;
+  padding:10px 40px;
+  position:relative;
+}
+.search::placeholder{
+  font-weight:400;
+  font-size:14px;
+  line-height:18px;
+  color:#A7A7A7;
+}
+.searchIcon{
+  position:absolute;
+  top:11px;
+  left:16px;
+}
+.sort{
+  box-shadow:var(--shadow-btn);
+  border-radius:599px;
+  position:relative;
+  white-space:nowrap;
+  border:none;
+  background-color:transparent;
+  padding:8px 16px;
+  font-weight:400;
+  font-size:14px;
+  line-height:18px;
+  color:#A7A7A7;
+  width:150px;
+  transition:.2s;
+  cursor:pointer;
+}
+.btnName{
+  padding-left:8px;
+  position:absolute;
+  top:10px;
+  right:16px;
+}
+.active{
+  background-image:var(--background-color-el);
+
+}
+.btnViewIcon{
+  fill:#A7A7A7;
+}
+.btnViewIconActive{
+  fill:#FFFFFF;
+}
+.btnView{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  box-shadow:var(--shadow-btn);
+  border:none;
+  background-color:transparent;
+  padding-top:5px;
+  cursor:pointer;
+
+}
+@media (max-width:1140px) {
+  .settings{
+    padding:0 64px
+  }
+}
+@media (max-width:768px) {
+  .search{
+    width:274px;
+  }
+}
+@media (max-width:700px) {
+  .search::placeholder{
+    color:transparent;
+  }
+  .search{
+    border-radius:50%;
+    width:38px;
+    height:38px;
+    padding:8px;
+  }
+  .searchIcon{
+    top:12px;
+    left:11px;
+  }
+  .sort{
+    position:relative;
+    border-radius:50%;
+    padding:8px;
+    font-size:0;
+    width:38px;
+    height:38px;
+
+  }
+  .sortIcon{
+    top:12px;
+    left:11px;
+    position:absolute;
+  }
+}
+@media (max-width:650px) {
+  .settings{
+    padding:0 16px
+  }
+}
+@media (max-width:400px) {
+  .settings{
+    padding:0 16px
+  }
+  .search,
+  .sort,
+  .btnView{
+    width:32px;
+    height:32px;
+  }
+  .searchIcon,.sortIcon{
+    top:9px;
+    left:8px;
+  }
+  .btnViewIcon{
+    width:16px;
+    height:16px;
+  }
+
+}
+

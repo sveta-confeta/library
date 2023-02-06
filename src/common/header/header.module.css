@@ -1,0 +1,141 @@
+.header {
+  display:flex;
+  align-items:center;
+  height:58px;
+  max-width:1110px;
+  margin:32px auto 0 auto;
+}
+.title {
+  font-weight:700;
+  font-size:32px;
+  line-height:40px;
+
+}
+.menuIconWrapper {
+  display:none;
+}
+.menuIcon {
+  position:relative;
+  width:26px;
+  height:3px;
+  background-color:#363636;
+  border-radius:5px;
+}
+.menuIcon::before {
+  position:absolute;
+  left:0;
+  top:-9px;
+  content:'';
+  width:26px;
+  height:3px;
+  background-color:#363636;
+  border-radius:5px;
+  transition:top 0.2s ease-in, top 0.2s linear 0.2s;
+}
+.menuIcon::after {
+  position:absolute;
+  left:0;
+  top:9px;
+  content:'';
+  width:26px;
+  height:3px;
+  background-color:#363636;
+  border-radius:5px;
+  transition:top 0.2s ease-in, top 0.2s linear 0.2s;
+}
+.menuIcon.active {
+  background-color:transparent !important;
+}
+.menuIcon.active::before {
+  background:var(--background-color-el);
+  transform:rotate(45deg);
+  top:0;
+  transition:top 0.2s linear, transform 0.2s ease-in 0.2s;
+}
+.menuIcon.active::after {
+  background:var(--background-color-el);
+
+  transform:rotate(-45deg);
+  top:0;
+  transition:top 0.2s linear, transform 0.2s ease-in 0.2s;
+}
+.avatarWrapper {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-left:auto;
+}
+.greeting {
+  font-weight:600;
+  font-size:14px;
+  line-height:18px;
+}
+.avatar {
+  display:block;
+  object-fit:cover;
+  border-radius:50%;
+
+}
+.btn {
+  margin-right:120px;
+  border:none;
+  background-color:transparent;
+  cursor:pointer;
+}
+
+
+@media (max-width:1140px) {
+  .header {
+    padding:0 64px;
+  }
+  .btn {
+    display:none;
+
+  }
+  .menuIconWrapper {
+    cursor:pointer;
+    display:block;
+    margin-right:24px;
+    border:none;
+    background-color:transparent;
+  }
+}
+
+@media (max-width:768px) {
+  .header {
+    height:auto;
+    margin:32px auto 22px auto;
+  }
+  .avatarWrapper {
+    display:none;
+  }
+}
+
+@media (max-width:650px) {
+  .header {
+    padding:0 16px;
+  }
+}
+
+@media (max-width:500px) {
+  .title {
+    font-size:25px;
+    line-height:35px;
+  }
+}
+
+@media (max-width:400px) {
+  .header{
+    margin:24px auto 24px auto;
+  }
+  .title {
+    font-size:18px;
+    line-height:28px;
+  }
+  .menuIconWrapper {
+    width:24px;
+    height:24px;
+  }
+}
+
+
