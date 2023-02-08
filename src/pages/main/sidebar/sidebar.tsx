@@ -28,9 +28,18 @@ export const Sidebar = () => {
     }
 
     const handlerMenu = () => {
-            dispatch(setMenuActive(!activeMenu));
+            dispatch(setMenuActive(false));
     };
 
+    // useEffect(()=>{
+    //     function handler(event:any){
+    //         if(!menuRef.current?.contains(event.target)){
+    //             dispatch(setMenuActive(false));
+    //         }
+    //     }
+    //     window.addEventListener('click', handler)
+    //     return ()=>window.removeEventListener('click', handler)
+    // },[])
 
     useEffect(() => {
         if (menuRef.current) {
@@ -39,7 +48,8 @@ export const Sidebar = () => {
 
 
         return (
-            <div ref={menuRef} tabIndex={-1}
+            <div ref={menuRef}
+                tabIndex={-1}
                 onBlur={handlerMenu}
                  className={`${s.menu} ${activeMenu ? s.activeMenu : ''}`}>
                 <div className={s.wrapperMenu}>

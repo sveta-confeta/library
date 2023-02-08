@@ -1,7 +1,6 @@
 import {RaitingValueType} from '../common/raiting/raiting';
 import {ReviewType} from '../pages/book/reviews/review/review';
 
-import defaultImg from './default-image .jpg'
 import img from './image.jpg'
 
 type GenreBookType={
@@ -11,9 +10,9 @@ type GenreBookType={
     param?:string
 
 }
-type BooksType={
+export type BooksType={
     id:string,
-    image:string,
+    image:string[],
     category: string,
     author: string,
     title: string,
@@ -62,7 +61,7 @@ export const genresOfBooks:GenreBookType[]=[
 export const books:BooksType[]=[
  {
      'id': '63ca7627f79ebdac69926ffc',
-     'image': img,
+     'image': [],
      'category': 'business',
      'author': 'Адитья Бхаргава',
      'title': 'Грокаем алгоритмы. Иллюстрированное пособие для програ...',
@@ -73,7 +72,7 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca7627549c20ea76acb8fc',
-     'image':img,
+     'image':[img],
      'category': 'business',
      'author': 'Lenore Delaney',
      'title': 'Грокаем алгоритмы. Иллюстрированное',
@@ -84,7 +83,8 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca762761ae79531f1acb53',
-     'image': img,
+     'image': [img,img,"https://swiperjs.com/demos/images/nature-1.jpg","https://swiperjs.com/demos/images/nature-2.jpg",
+         "https://swiperjs.com/demos/images/nature-5.jpg"],
      'category': 'business',
      'author': 'Katie Terry',
      'title': 'Грокаем алгоритмы',
@@ -95,7 +95,8 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca7627eab55a2591cefaac',
-     'image': img,
+     'image': [img,img,"https://swiperjs.com/demos/images/nature-1.jpg","https://swiperjs.com/demos/images/nature-2.jpg",
+         "https://swiperjs.com/demos/images/nature-5.jpg"],
      'category': 'business',
      'author': 'Tucker Langley',
      'title': 'Riverdale Avenue, Hendersonville, Michigan',
@@ -106,7 +107,8 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca7627db47f2a9cf5abfee',
-     'image': img,
+     'image': [img,img,"https://swiperjs.com/demos/images/nature-1.jpg","https://swiperjs.com/demos/images/nature-2.jpg",
+         "https://swiperjs.com/demos/images/nature-5.jpg"],
      'category': 'business',
      'author': 'Watkins Watts',
      'title': 'Lafayette Walk, Felt, Pennsylvania',
@@ -117,7 +119,7 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca76278e7bae49e60cc08f',
-     'image':defaultImg,
+     'image':[],
      'category': 'business',
      'author': 'Jocelyn Benjamin',
      'title': 'Hillel Place, Lydia, California',
@@ -128,7 +130,7 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca76277acbfd2757ff0e87',
-     'image': img,
+     'image': [img],
      'category': 'business',
      'author': 'Lola Andrews',
      'title': 'Exeter Street, Linwood, South Dakota',
@@ -139,7 +141,8 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca76279b279b3f88322e2e',
-     'image': img,
+     'image': [img,img,"https://swiperjs.com/demos/images/nature-1.jpg","https://swiperjs.com/demos/images/nature-2.jpg",
+         "https://swiperjs.com/demos/images/nature-5.jpg"],
      'category': 'business',
      'author': 'Marylou Burton',
      'title': 'Dictum Court, Witmer, Puerto Rico',
@@ -150,7 +153,7 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca7627b50fe16d3ce08a55',
-     'image': img,
+     'image': [img],
      'category': 'business',
      'author': 'Janie Roman',
      'title': 'McKibben Street, Harrison, Kentucky',
@@ -161,7 +164,7 @@ export const books:BooksType[]=[
  },
  {
      'id': '63ca76271344102600937710',
-     'image': defaultImg,
+     'image': [],
      'category': 'business',
      'author': 'Shana Duke',
      'title': 'Hendrix Street, Thermal, Virgin Islands',

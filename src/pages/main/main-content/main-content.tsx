@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
+import defaultImg from '../../../assets/default-image .jpg'
 import {books} from '../../../assets/mocks';
 import {Button} from '../../../common/button/button';
 import {Raiting} from '../../../common/raiting/raiting';
@@ -12,6 +13,16 @@ export const MainContent = () => {
     const [btnToggleBlock, setBtnToggleBlock] = useState(true)
     const [btnToggleList, setBtnToggleList] = useState(false)
 
+    function Image(imgages:string[]){
+            if (imgages.length===0) {
+                return defaultImg;
+            }
+            if(imgages.length>0)
+            return imgages[0];
+
+        }
+
+
     return (
         <React.Fragment>
             <Settings btnToggleList={btnToggleList} setBtnToggleList={setBtnToggleList}
@@ -22,7 +33,7 @@ export const MainContent = () => {
                         <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
                              data-test-id='card'
                         >
-                            <img alt={m.title} src={m.image}
+                            <img alt={m.title} src={Image(m.image)}
                                  className={btnToggleList ? s.inlineCoverBook : s.coverBook}/>
                             {m.rating !== 0 ?
                                 <Raiting className={btnToggleList ? s.inlineRaiting : ''}
@@ -34,7 +45,7 @@ export const MainContent = () => {
                             <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{m.title}</h4>
 
                             <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.author}, {m.year} </h5>
-                            <Button  className={btnToggleList ? s.inlineBtn : ''} btnToggleList={btnToggleList}
+                            <Button  onClick={(e:any)=> e.preventDefault()} className={btnToggleList ? s.inlineBtn : ''} btnToggleList={btnToggleList}
                                     name={m.bookedTill ? `Занята до ${m.bookedTill}`
                                         : !m.isBooked ? 'Забронировать' : 'Забронирована'}
                             />

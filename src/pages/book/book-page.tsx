@@ -1,65 +1,84 @@
+import React, {useState} from 'react';
+import {useParams} from 'react-router-dom';
+import arrowTop from '../../assets/stroke-top.svg'
+import arrowBottom from '../../assets/stroke-bottom.svg'
 
-
-import React from 'react';
-
-import imgBook from '../../assets/book-page/imageBook.png'
 import {Button} from '../../common/button/button';
 import {Raiting} from '../../common/raiting/raiting';
 
+import BookSlider from './book-slider/book-slider';
 import {BreadCrumb} from './bread-crumb/bread-crumb';
 import {Reviews} from './reviews/reviews';
 import {Table} from './table/table';
 
 import s from './book-page.module.css'
+import {TopIcon} from "../../assets/icon-components/top-icon";
+import {BottomIcon} from "../../assets/icon-components/bottom-icon";
 
-export const BookPage = () =>
+export const BookPage = () => {
+    const {id} =useParams();
+const [openReviews,setOpenReviews]=useState(false)
 
 
-    (
+return(
         <React.Fragment>
-        <BreadCrumb/>
-        <section className={s.bookPage}>
-            <div className={s.bookPageContainer}>
-                <div className={s.bookWrapper}>
-                    <img className={s.imgBook} src={imgBook} alt='обложка выбранной книги'/>
-                    <div className={s.bookContent}>
-                        <h2 className={s.titleBook}>Грокаем алгоритмы. Иллюстрированное пособие для
-                            программистов и любопытствующих</h2>
-                        <h3 className={s.author}>Адитья Бхаргава, 2019</h3>
+            <BreadCrumb/>
+            <section className={s.bookPage}>
+                <div className={s.bookPageContainer}>
+                    <div className={s.bookWrapper}>
+                        <div className={s.imgBook}>
+                            <BookSlider id={id}/>
+                        </div>
+                        <div className={s.bookContent}>
+                            <h2 className={s.titleBook}>Грокаем алгоритмы. Иллюстрированное пособие
+                                для
+                                программистов и любопытствующих</h2>
+                            <h3 className={s.author}>Адитья Бхаргава, 2019</h3>
                             <Button name="Забронировать" className={s.btnBook}/>
-                        <h4 className={s.aboutTitle}>O книге</h4>
-                        <p className={`${s.about} ${s.firstP}`}>Алгоритмы — это всего лишь пошаговые алгоритмы
-                            решения задач, и большинство таких задач уже были кем-то решены,
-                            протестированы и проверены. Можно, конечно, погрузится в глубокую
-                            философию гениального Кнута, изучить многостраничные фолианты с
-                            доказательствами и обоснованиями, но хотите ли вы тратить на это свое
-                            время?</p>
+                            <h4 className={s.aboutTitle}>O книге</h4>
+                            <p className={`${s.about} ${s.firstP}`}>Алгоритмы — это всего лишь
+                                пошаговые алгоритмы
+                                решения задач, и большинство таких задач уже были кем-то решены,
+                                протестированы и проверены. Можно, конечно, погрузится в глубокую
+                                философию гениального Кнута, изучить многостраничные фолианты с
+                                доказательствами и обоснованиями, но хотите ли вы тратить на это
+                                свое
+                                время?</p>
 
-                           <h4 className={`${s.about} ${s.secondP}`}> Откройте великолепно иллюстрированную книгу и вы сразу поймете, что
-                            алгоритмы — это просто. А грокать алгоритмы — это веселое и
-                            увлекательное занятие.</h4>
+                            <h4 className={`${s.about} ${s.secondP}`}> Откройте великолепно
+                                иллюстрированную книгу и вы сразу поймете, что
+                                алгоритмы — это просто. А грокать алгоритмы — это веселое и
+                                увлекательное занятие.</h4>
+                        </div>
                     </div>
-                </div>
-                <div className={s.raitingSection}>
-                    <h4 className={s.titleSection}>Рейтинг</h4>
-                    <div className={s.mobHidden}> <Raiting value={4}/></div>
-                    <div className={s.mobShow}><Raiting height='34' width='34' value={0}  className={s.bookRaiting}/> <span>4.3</span></div>
-                </div>
-                <div className={s.infoSection}>
-                    <h4 className={s.titleSection}>Подробная информация</h4>
-                   <Table/>
-                </div>
-                <div className={s.reviewsSection}>
-                    <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span >2</span></h4>
-                    <Reviews/>
+                    <div className={s.raitingSection}>
+                        <h4 className={s.titleSection}>Рейтинг</h4>
+                        <div className={s.mobHidden}><Raiting value={4}/></div>
+                        <div className={s.mobShow}><Raiting height='34' width='34' value={0}
+                                                            className={s.bookRaiting}/>
+                            <span>4.3</span></div>
+                    </div>
+                    <div className={s.infoSection}>
+                        <h4 className={s.titleSection}>Подробная информация</h4>
+                        <Table/>
+                    </div>
+                    <div className={s.reviewsSection}>
+                        <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span>2</span><button onClick={()=>setOpenReviews(!openReviews)} className={s.btnReviews} type="button">
+                            {openReviews ? <BottomIcon fill='#363636'/> :  <TopIcon fill='#363636'/>}
+                            </button> </h4>
+                        {openReviews
+                            ?
+                            <Reviews/>
+                        : ''}
+
+
+                    </div>
+                    <Button className={s.btnStyle} name='оценить книгу'/>
 
                 </div>
-                <Button className={s.btnStyle} name='оценить книгу'/>
-
-            </div>
-        </section>
+            </section>
         </React.Fragment>
     )
 
 
-
+}

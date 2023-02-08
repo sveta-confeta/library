@@ -1,36 +1,43 @@
-
-.settings{
+.settings {
   display:flex;
   justify-content:space-between;
   grid-area:settings;
 }
-.group{
+.group {
   display:flex;
   gap:16px;
 }
-.searchWrapper{
+.searchWrapper {
   position:relative;
 }
-.search{
+.search {
   box-shadow:var(--shadow-btn);
   border-radius:599px;
   border:none;
   width:350px;
   padding:10px 40px;
   position:relative;
+  cursor:pointer;
 }
-.search::placeholder{
+.search::placeholder {
   font-weight:400;
   font-size:14px;
   line-height:18px;
-  color:#A7A7A7;
+  color:#a7a7a7;
 }
-.searchIcon{
+.searchIcon {
   position:absolute;
   top:11px;
   left:16px;
+  cursor:pointer;
+  background-color:transparent;
+  border:none
 }
-.sort{
+.btnSearch{
+  color:tomato;
+  display:none;
+}
+.sort {
   box-shadow:var(--shadow-btn);
   border-radius:599px;
   position:relative;
@@ -41,28 +48,27 @@
   font-weight:400;
   font-size:14px;
   line-height:18px;
-  color:#A7A7A7;
+  color:#a7a7a7;
   width:150px;
-  transition:.2s;
+  transition:0.2s;
   cursor:pointer;
 }
-.btnName{
+.btnName {
   padding-left:8px;
   position:absolute;
   top:10px;
   right:16px;
 }
-.active{
+.active {
   background-image:var(--background-color-el);
-
 }
-.btnViewIcon{
-  fill:#A7A7A7;
+.btnViewIcon {
+  fill:#a7a7a7;
 }
-.btnViewIconActive{
-  fill:#FFFFFF;
+.btnViewIconActive {
+  fill:#ffffff;
 }
-.btnView{
+.btnView {
   width:38px;
   height:38px;
   border-radius:50%;
@@ -71,70 +77,108 @@
   background-color:transparent;
   padding-top:5px;
   cursor:pointer;
-
 }
 @media (max-width:1140px) {
-  .settings{
-    padding:0 64px
+  .settings {
+    padding:0 64px;
   }
 }
 @media (max-width:768px) {
-  .search{
+  .search {
     width:274px;
   }
 }
 @media (max-width:700px) {
-  .search::placeholder{
-    color:transparent;
+  .searchIcon {
+    top:12px;
+    left:11px;
+    transition:all 1s;
   }
-  .search{
+  .search {
     border-radius:50%;
     width:38px;
     height:38px;
     padding:8px;
+    transition:all .5s ease-in-out;
   }
-  .searchIcon{
-    top:12px;
-    left:11px;
+  .search.focus {
+    border-radius:599px;
+    position:relative;
+    border:none;
+    outline:none;
+    width:288px;
+    padding-left:16px;
+    cursor:text;
+    opacity:1;
   }
-  .sort{
+  .search.focus ~ .searchIcon {
+    opacity:0;
+    transition:0.5s;
+  }
+  .search.focus ~ .btnSearch {
+    display:block;
+    position:absolute;
+    width:9px;
+    height:9px;
+    top:11px ;
+    right:16px;
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
+    outline:none;
+  }
+  .searchWrapper .search::placeholder {
+    padding-left:10px;
+  }
+  .searchIcon::placeholder {
+    color:transparent;
+  }
+  .sort {
     position:relative;
     border-radius:50%;
     padding:8px;
     font-size:0;
     width:38px;
     height:38px;
-
   }
-  .sortIcon{
+  .sortIcon {
     top:12px;
     left:11px;
     position:absolute;
   }
+  .sort.focus{
+    display:none;
+  }
+  .group.focus{
+    display:none;
+  }
 }
 @media (max-width:650px) {
-  .settings{
-    padding:0 16px
+  .settings {
+    padding:0 16px;
   }
 }
 @media (max-width:400px) {
-  .settings{
-    padding:0 16px
+  .settings {
+    padding:0 16px;
   }
   .search,
   .sort,
-  .btnView{
+  .btnView {
     width:32px;
     height:32px;
   }
-  .searchIcon,.sortIcon{
+  .searchIcon,
+  .sortIcon {
     top:9px;
     left:8px;
   }
-  .btnViewIcon{
+  .btnViewIcon {
     width:16px;
     height:16px;
   }
+  .search.focus ~ .btnSearch {
+    top:8px ;
 
+  }
 }
-
