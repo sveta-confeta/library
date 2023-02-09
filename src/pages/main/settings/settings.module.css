@@ -159,6 +159,12 @@
   }
 }
 @media (max-width:400px) {
+  .searchIcon::placeholder {
+    font-weight:400;
+    font-size:12px;
+    line-height:18px;
+    color:#A7A7A7;
+  }
   .settings {
     padding:0 16px;
   }

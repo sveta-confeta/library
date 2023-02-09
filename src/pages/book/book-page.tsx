@@ -14,6 +14,7 @@ import {Table} from './table/table';
 import s from './book-page.module.css'
 import {TopIcon} from "../../assets/icon-components/top-icon";
 import {BottomIcon} from "../../assets/icon-components/bottom-icon";
+import {Close} from "../../assets/icon-components/close";
 
 export const BookPage = () => {
     const {id} =useParams();
@@ -63,14 +64,13 @@ return(
                         <Table/>
                     </div>
                     <div className={s.reviewsSection}>
-                        <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span>2</span><button onClick={()=>setOpenReviews(!openReviews)} className={s.btnReviews} type="button">
+                        <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span>2</span><button data-test-id='button-hide-reviews' onClick={()=>setOpenReviews(!openReviews)} className={s.btnReviews} type="button">
                             {openReviews ? <BottomIcon fill='#363636'/> :  <TopIcon fill='#363636'/>}
                             </button> </h4>
                         {openReviews
                             ?
                             <Reviews/>
                         : ''}
-
 
                     </div>
                     <Button className={s.btnStyle} name='оценить книгу'/>

@@ -26,7 +26,7 @@ export const Header = () => {
 
     return (
         <header className={s.header}>
-            <button className={s.menuIconWrapper} type="button" onClick={handlerMenu}>
+            <button className={s.menuIconWrapper} data-test-id='button-burger' type="button" onClick={handlerMenu}>
                 <div className={`${s.menuIcon} ${activeMenu ? s.active : ''}`} />
             </button>
             <button className={s.btn} type="button" onClick={clickHandler}><img src={logo}

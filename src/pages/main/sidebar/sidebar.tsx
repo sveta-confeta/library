@@ -18,6 +18,7 @@ export const Sidebar = () => {
     const [showNavbar, setShowNavbar] = useState(false);
     const location = useLocation();
 
+
     function findUrl(str: string, p: string) {
         return str.includes(p)
     }
@@ -27,31 +28,28 @@ export const Sidebar = () => {
         setShowNavbar(!showNavbar)
     }
 
-    const handlerMenu = () => {
+    const handlerMenuOutside = (event:MouseEvent | TouchEvent) => {
+        if(!menuRef.current || !menuRef.current?.contains (event.target as Node)){
             dispatch(setMenuActive(false));
+        }
+
     };
 
-    // useEffect(()=>{
-    //     function handler(event:any){
-    //         if(!menuRef.current?.contains(event.target)){
-    //             dispatch(setMenuActive(false));
-    //         }
-    //     }
-    //     window.addEventListener('click', handler)
-    //     return ()=>window.removeEventListener('click', handler)
-    // },[])
+    const handlerMenu=()=>{
+        dispatch(setMenuActive(false));
+    }
 
-    useEffect(() => {
-        if (menuRef.current) {
-            menuRef.current.focus();
-        }},[] )
+    useEffect(()=>{
+
+        document.addEventListener('mousedown', handlerMenuOutside)
+         return ()=>document.removeEventListener('mousedown', handlerMenuOutside)
+    })
+
+
 
 
         return (
-            <div ref={menuRef}
-                tabIndex={-1}
-                onBlur={handlerMenu}
-                 className={`${s.menu} ${activeMenu ? s.activeMenu : ''}`}>
+            <div data-test-id='burger-navigation' ref={menuRef} className={`${s.menu} ${activeMenu ? s.activeMenu : ''}`} >
                 <div className={s.wrapperMenu}>
                     <div className={s.wrap}><NavLink to='/books/all'
                                                      className={currentState ? s.active : s.menuTitle}>
@@ -64,7 +62,7 @@ export const Sidebar = () => {
                         }
                     </div>
 
-                    <Navbar showNavbar={showNavbar}/>
+                    <Navbar handlerMenu={handlerMenu} showNavbar={showNavbar}/>
 
                     <NavLink to='/terms'
                              className={({isActive}) => isActive ? s.activeDocument : s.document}>Правила
