@@ -37,17 +37,14 @@ export default function BookSlider(props: BookSliderType) {
     }
 
     useEffect(() => {
-        window.addEventListener("resize", handleResize)
-        window.addEventListener("resize", handleResizeSmall)
+        window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', handleResizeSmall)
 
-    },[])
+    }, [])
 
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
     const [swiperActiveIndex, setSwiperActiveIndex] = useState<number>(0);
 
-    const images:BooksType = books.find(el => props.id === el.id)!;
-
-    const arrImgs:string[]=images.image!;
 
     const slideTo = (index: number) => {
         if (thumbsSwiper) {
@@ -56,71 +53,59 @@ export default function BookSlider(props: BookSliderType) {
         }
         setSwiperActiveIndex(index);
     };
+    const images: BooksType = books.find(el => props.id === el.id)!;
+    const arrImgs: string[] = images.image!;
 
     return (
         <React.Fragment>
             <Swiper
-                data-test-id='slide-big'
                 loop={true}
-                spaceBetween={10}
-                pagination= {{ clickable: isMobile }}
+                spaceBetween={30}
+                pagination={{clickable: isMobile}}
                 navigation={true}
                 thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,}}
-                modules={[ Navigation, Thumbs]}
-                 watchSlidesProgress={true}
+                modules={[Navigation, Thumbs]}
+                watchSlidesProgress={true}
                 grabCursor={true}
-                className={ `${s.swiperStyle} ${isMobile ?  s.placePagination : ''} ${isMobileSmall ?  s.placePaginationSmall : ''}`}>
-                {
-                    (arrImgs.length)!==0 ?
-                    arrImgs.map((m) => (
-                        <SwiperSlide >
-                            < img   data-test-id='slide-big' src={m} alt='обложка выбранной книги'/>
-                        </SwiperSlide>
-                    )) :
-                        <SwiperSlide >
-                            <img src={defaultImg} alt='обложка выбранной книги'/>
-                        </SwiperSlide>
-                }
+                className={`${s.swiperStyle}`}>
+
+
+
+
+                {arrImgs.map((m) => (
+                    <SwiperSlide>
+                        <img src={m} alt='обложка выбранной книги'/>
+                    </SwiperSlide>
+                ))}
             </Swiper>
-            {
-                isMobile ? "" :
-                     (arrImgs.length >1)  ?  <Swiper
-                        loop={true}
-                        loopedSlides={10}
-                        onSwiper={setThumbsSwiper}
-                        spaceBetween={10}
-                        slidesPerView={5}
-                        freeMode={true}
-                        watchSlidesProgress={true}
-                        scrollbar={{draggable:true}}
-                        centeredSlides={true}
-                        watchOverflow={true}
-                        modules={[FreeMode, Navigation, Thumbs]}
-                        slideVisibleClass={s.slideVisible}
-                        className={s.swiperStyleThumbs}>
 
-
-
-
-                        {arrImgs.map((m,ind) => (
-                            <SwiperSlide onClick={() => slideTo(ind)}>
-                                <div className= {ind === swiperActiveIndex ? s.sliderActive : s.imgWrapper}>
-                                    <img data-test-id='slide-mini' src={m} alt='обложка выбранной книги'/>
-                                </div>
-
-
-
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>: ''
-            }
-
+            <Swiper
+                loop={true}
+                loopedSlides={10}
+                onSwiper={setThumbsSwiper}
+                spaceBetween={10}
+                slidesPerView={5}
+                freeMode={true}
+                watchSlidesProgress={true}
+                scrollbar={{draggable: true}}
+                centeredSlides={true}
+                watchOverflow={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                slideVisibleClass={s.slideVisible}
+                className={s.swiperStyleThumbs}>
+                {arrImgs.map((m, ind) => (
+                    <SwiperSlide onClick={() => slideTo(ind)}>
+                        <div className={ind === swiperActiveIndex ? s.sliderActive : s.imgWrapper}>
+                            <img src={m} alt='обложка выбранной книги'/>
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
 
 
         </React.Fragment>
     )
 };
-
 
 
 

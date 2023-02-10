@@ -12,21 +12,30 @@ import {Reviews} from './reviews/reviews';
 import {Table} from './table/table';
 
 import s from './book-page.module.css'
+import {books, BooksType} from "../../assets/mocks";
+import defaultImg from '../../assets/default-image .jpg'
 
 export const BookPage = () => {
-    const {id} =useParams();
-const [openReviews,setOpenReviews]=useState(false)
+    const {id} = useParams();
+
+    const images: BooksType = books.find(el => id === el.id)!;
+    const arrImgs: string[] = images.image!;
 
 
-return(
+    const [openReviews, setOpenReviews] = useState(false)
+
+
+    return (
         <React.Fragment>
             <BreadCrumb/>
             <section className={s.bookPage}>
                 <div className={s.bookPageContainer}>
                     <div className={s.bookWrapper}>
-                        <div className={s.imgBook}>
-                            <BookSlider id={id}/>
-                        </div>
+                        { arrImgs.length===0 ?<img className={s.aloneBook} alt="обложка книги" src={defaultImg}/> :
+                                arrImgs.length===1 ?<img className={s.aloneBook} alt="обложка книги" src={arrImgs[0]}/>
+                                :  <div className={s.imgBook}><BookSlider id={id}/>  </div>
+                        }
+
                         <div className={s.bookContent}>
                             <h2 className={s.titleBook}>Грокаем алгоритмы. Иллюстрированное пособие
                                 для
@@ -61,16 +70,22 @@ return(
                         <Table/>
                     </div>
                     <div className={s.reviewsSection}>
-                        <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span>2</span><button data-test-id='button-hide-reviews' onClick={()=>setOpenReviews(!openReviews)} className={s.btnReviews} type="button">
-                            {openReviews ? <BottomIcon fill='#363636'/> :  <TopIcon fill='#363636'/>}
-                            </button> </h4>
+                        <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span>2</span>
+                            <button data-test-id='button-hide-reviews'
+                                    onClick={() => setOpenReviews(!openReviews)}
+                                    className={s.btnReviews} type="button">
+                                {openReviews ? <BottomIcon fill='#363636'/> :
+                                    <TopIcon fill='#363636'/>}
+                            </button>
+                        </h4>
                         {openReviews
                             ?
                             <Reviews/>
-                        : ''}
+                            : ''}
 
                     </div>
-                    <Button data-test-id='button-rating' className={s.btnStyle} name='оценить книгу'/>
+                    <Button data-test-id='button-rating' className={s.btnStyle}
+                            name='оценить книгу'/>
 
                 </div>
             </section>
