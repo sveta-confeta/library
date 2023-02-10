@@ -36,6 +36,8 @@ export const Settings = (props: SettingsType) => {
                     <input data-test-id='input-search'
                            className={`${s.search} ${searchChange ? s.focus : ''} `} type="search"
                            placeholder="Поиск книги или автора…"/>
+                    {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                    {searchChange ? ' ': <button type="button" className={s.searchBtn} />}
                     <button data-test-id='button-search-open' onClick={() => setSearchChange(true)}
                             className={`${s.searchIcon} ${searchChange ? s.focus : ''} `}
                             type="button"><img src={IconSearch} alt="иконка с поиском"/></button>

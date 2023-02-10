@@ -15,9 +15,21 @@ export const Sidebar = () => {
 
     const menuRef = useRef<HTMLInputElement | null>(null)
     const activeMenu = useAppSelector<boolean>(state => state.app.menuActive);
-    const [showNavbar, setShowNavbar] = useState(false);
+    const [showNavbar, setShowNavbar] = useState(true);
+    const[mobVersion,setMobVersion]=useState(false)
     const location = useLocation();
 
+    const handleResize = () => {
+        if (window.innerWidth < 1140) {
+            setMobVersion(true)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize)
+
+
+    },[])
 
     function findUrl(str: string, p: string) {
         return str.includes(p)
@@ -51,9 +63,10 @@ export const Sidebar = () => {
         return (
             <div data-test-id='burger-navigation' ref={menuRef} className={`${s.menu} ${activeMenu ? s.activeMenu : ''}`} >
                 <div className={s.wrapperMenu}>
-                    <div className={s.wrap}><NavLink to='/books/all'
+                    <div  className={s.wrap}  ><NavLink data-test-id={mobVersion ? 'burger-showcase' :'navigation-showcase'}  to='/books/all'
+
                                                      className={currentState ? s.active : s.menuTitle}>
-                        Витрина книг </NavLink>
+                        Витрина книг </NavLink >
                         {
                             currentState ? <button type="button" className={s.btnArrow}
                                                    onClick={showNavbarHandler}><img
@@ -62,12 +75,12 @@ export const Sidebar = () => {
                         }
                     </div>
 
-                    <Navbar handlerMenu={handlerMenu} showNavbar={showNavbar}/>
+                    <Navbar handlerMenu={handlerMenu} showNavbar={showNavbar} mobVersion={mobVersion}/>
 
-                    <NavLink to='/terms'
+                    <NavLink data-test-id='burger-terms' to='/terms'
                              className={({isActive}) => isActive ? s.activeDocument : s.document}>Правила
                         пользования</NavLink>
-                    <NavLink to='/contract'
+                    <NavLink data-test-id='burger-contract' to='/contract'
                              className={({isActive}) => isActive ? s.activeDocument : s.document}> Договор
                         оферты</NavLink>
                 </div>

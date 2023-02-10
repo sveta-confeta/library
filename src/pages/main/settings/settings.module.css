@@ -25,6 +25,8 @@
   line-height:18px;
   color:#a7a7a7;
 }
+/*/del/*/
+.searchBtn{ display:none}
 .searchIcon {
   position:absolute;
   top:11px;
@@ -95,6 +97,16 @@
     transition:all 1s;
   }
   .search {
+    display:none;
+  }
+  /*/del/*/
+  .searchBtn {
+    display:block;
+    box-shadow:var(--shadow-btn);
+    border:none;
+    position:relative;
+    cursor:pointer;
+    background-color:transparent;
     border-radius:50%;
     width:38px;
     height:38px;
@@ -102,6 +114,7 @@
     transition:all .5s ease-in-out;
   }
   .search.focus {
+    display:block;
     border-radius:599px;
     position:relative;
     border:none;

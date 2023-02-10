@@ -42,7 +42,6 @@ export const readers:ReviewType[]=[{
 
     }]
 export const genresOfBooks:GenreBookType[]=[
-    {'id':15, 'genre':'Все книги','param': 'all'},
     {'id':1,'genre':'Бизнес-книги',count:14,'param': 'business'},
     {'id':2,'genre':' Детективы',count:8,'param': 'detectives'},
     {'id':3,'genre':'Детские книги',count:14,'param': 'childish'},

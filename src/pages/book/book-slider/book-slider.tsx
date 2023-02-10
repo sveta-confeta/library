@@ -28,15 +28,11 @@ export default function BookSlider(props: BookSliderType) {
     const handleResize = () => {
         if (window.innerWidth <= 940) {
             setIsMobile(true)
-        } else {
-            setIsMobile(false)
         }
     }
     const handleResizeSmall = () => {
         if (window.innerWidth <= 500) {
             setIsMobileSmall(true)
-        } else {
-            setIsMobileSmall(false)
         }
     }
 
@@ -47,25 +43,30 @@ export default function BookSlider(props: BookSliderType) {
     },[])
 
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
+    const [swiperActiveIndex, setSwiperActiveIndex] = useState<number>(0);
 
     const images:BooksType = books.find(el => props.id === el.id)!;
 
     const arrImgs:string[]=images.image!;
 
-
-
+    const slideTo = (index: number) => {
+        if (thumbsSwiper) {
+            thumbsSwiper.slideTo(index);
+            thumbsSwiper.activeIndex = index;
+        }
+        setSwiperActiveIndex(index);
+    };
 
     return (
         <React.Fragment>
             <Swiper
+                data-test-id='slide-big'
                 loop={true}
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
                 spaceBetween={10}
                 pagination= {{ clickable: isMobile }}
                 navigation={true}
                 thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,}}
-                modules={[FreeMode, Navigation, Thumbs]}
+                modules={[ Navigation, Thumbs]}
                  watchSlidesProgress={true}
                 grabCursor={true}
                 className={ `${s.swiperStyle} ${isMobile ?  s.placePagination : ''} ${isMobileSmall ?  s.placePaginationSmall : ''}`}>
@@ -73,7 +74,7 @@ export default function BookSlider(props: BookSliderType) {
                     (arrImgs.length)!==0 ?
                     arrImgs.map((m) => (
                         <SwiperSlide >
-                            <img src={m} alt='обложка выбранной книги'/>
+                            < img   data-test-id='slide-big' src={m} alt='обложка выбранной книги'/>
                         </SwiperSlide>
                     )) :
                         <SwiperSlide >
@@ -81,38 +82,45 @@ export default function BookSlider(props: BookSliderType) {
                         </SwiperSlide>
                 }
             </Swiper>
-            { isMobile ? '' :   <Swiper
-                loop={true}
-                onSwiper={setThumbsSwiper}
-                spaceBetween={10}
-                slidesPerView={4}
-                freeMode={true}
-                watchSlidesProgress={true}
-                modules={[FreeMode, Navigation, Thumbs]}
-                className={s.swiperStyleThumbs}>
+            {
+                isMobile ? "" :
+                     (arrImgs.length >1)  ?  <Swiper
+                        loop={true}
+                        loopedSlides={10}
+                        onSwiper={setThumbsSwiper}
+                        spaceBetween={10}
+                        slidesPerView={5}
+                        freeMode={true}
+                        watchSlidesProgress={true}
+                        scrollbar={{draggable:true}}
+                        centeredSlides={true}
+                        watchOverflow={true}
+                        modules={[FreeMode, Navigation, Thumbs]}
+                        slideVisibleClass={s.slideVisible}
+                        className={s.swiperStyleThumbs}>
 
-                {
-                    (arrImgs.length >1)
-                        ?
-                        arrImgs.map((m) => (
-                            <SwiperSlide >
-                                {({ isActive }) => (
-                                    <div className= {isActive ? s.active : s.imgWrapper}>
-                                        <img src={m} alt='обложка выбранной книги'/>
-                                    </div>
 
-                                )}
+
+
+                        {arrImgs.map((m,ind) => (
+                            <SwiperSlide onClick={() => slideTo(ind)}>
+                                <div className= {ind === swiperActiveIndex ? s.sliderActive : s.imgWrapper}>
+                                    <img data-test-id='slide-mini' src={m} alt='обложка выбранной книги'/>
+                                </div>
+
+
 
                             </SwiperSlide>
-                        )) :
-                        ''
-                }
-            </Swiper>
+                        ))}
+                    </Swiper>: ''
             }
+
+
 
         </React.Fragment>
     )
 };
+
 
 
 

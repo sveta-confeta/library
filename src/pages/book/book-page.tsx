@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
-import arrowTop from '../../assets/stroke-top.svg'
-import arrowBottom from '../../assets/stroke-bottom.svg'
 
+import {BottomIcon} from '../../assets/icon-components/bottom-icon';
+import {TopIcon} from '../../assets/icon-components/top-icon';
 import {Button} from '../../common/button/button';
 import {Raiting} from '../../common/raiting/raiting';
 
@@ -12,9 +12,6 @@ import {Reviews} from './reviews/reviews';
 import {Table} from './table/table';
 
 import s from './book-page.module.css'
-import {TopIcon} from "../../assets/icon-components/top-icon";
-import {BottomIcon} from "../../assets/icon-components/bottom-icon";
-import {Close} from "../../assets/icon-components/close";
 
 export const BookPage = () => {
     const {id} =useParams();
@@ -73,7 +70,7 @@ return(
                         : ''}
 
                     </div>
-                    <Button className={s.btnStyle} name='оценить книгу'/>
+                    <Button data-test-id='button-rating' className={s.btnStyle} name='оценить книгу'/>
 
                 </div>
             </section>

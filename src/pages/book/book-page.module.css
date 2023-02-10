@@ -5,6 +5,8 @@
 .imgBook{
   min-height:594px;
   width:445px;
+  transition:none;
+  box-sizing:border-box;
 }
 .bookPageContainer{
   max-width:1110px;
@@ -90,16 +92,16 @@
 
 }
 .btnReviews{
-    background-color: transparent;
-    border: none;
-    margin-left: 29px;
-    cursor: pointer;
+  background-color:transparent;
+  border:none;
+  margin-left:29px;
+  cursor:pointer;
 
 }
 .close{
-    color: #F83600;
-    width: 50px;
-    height: 50px;
+  color:#F83600;
+  width:50px;
+  height:50px;
 }
 .btnStyle{
   padding:14px 0;
@@ -161,6 +163,7 @@
     font-weight:600;
     font-size:16px;
     line-height:24px;
+
   }
   .raitingSection{
     margin-bottom:54px;
@@ -254,6 +257,9 @@
     line-height:18px;
     padding-top:11px;
     padding-bottom:11px;
+  }
+  .titleSection:after{
+    width:280px;
   }
 }
 
