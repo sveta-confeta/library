@@ -14,6 +14,7 @@ import {Table} from './table/table';
 import s from './book-page.module.css'
 import {books, BooksType} from "../../assets/mocks";
 import defaultImg from '../../assets/default-image .jpg'
+import {InstIcon} from "../../assets/icon-components/inst-icon";
 
 export const BookPage = () => {
     const {id} = useParams();
@@ -35,7 +36,7 @@ export const BookPage = () => {
                                 arrImgs.length===1 ?<img className={s.aloneBook} alt="обложка книги" src={arrImgs[0]}/>
                                 :  <div className={s.imgBook}><BookSlider id={id}/>  </div>
                         }
-
+                        <InstIcon/>
                         <div className={s.bookContent}>
                             <h2 className={s.titleBook}>Грокаем алгоритмы. Иллюстрированное пособие
                                 для
