@@ -1,22 +1,23 @@
-.bookPage{
+.bookPage {
   padding:0 0 42px 0;
 
 }
-.imgBook{
-    min-height:594px;
-    width:445px;
-}
-.aloneBook{
+.imgBook {
   min-height:594px;
+  width:445px;
+
+}
+.imgBook .aloneImg {
+  object-fit:cover;
   width:445px;
   border:1px solid #BFC4C9;
   border-radius:15px;
 }
-.bookPageContainer{
+.bookPageContainer {
   max-width:1110px;
   margin:0 auto;
 }
-.btnBook{
+.btnBook {
   padding:14px 96px;
   width:350px;
   font-size:15px;
@@ -25,41 +26,41 @@
   margin-bottom:62px;
 
 }
-.bookWrapper{
+.bookWrapper {
   display:flex;
   gap:30px;
   margin-bottom:106px;
 }
-.titleBook{
+.titleBook {
   font-weight:700;
   font-size:32px;
   line-height:40px;
   margin-bottom:24px;
 }
-.author{
+.author {
   font-weight:700;
   font-size:18px;
   line-height:28px;
   color:#A7A7A7;
   margin-bottom:32px;
 }
-.aboutTitle{
+.aboutTitle {
   font-weight:700;
   font-size:18px;
   line-height:28px;
   margin-bottom:32px;
 }
-.about{
+.about {
   font-weight:400;
   font-size:16px;
   line-height:24px;
 
 }
-.firstP{
+.firstP {
   margin-bottom:25px;
 
 }
-.titleSection{
+.titleSection {
   font-weight:700;
   font-size:18px;
   line-height:28px;
@@ -67,8 +68,8 @@
   position:relative;
   margin-bottom:16px;
 }
-.titleSection:after{
-  content:'' ;
+.titleSection:after {
+  content:'';
   position:absolute;
   height:1px;
   width:350px;
@@ -76,16 +77,16 @@
   bottom:0;
   left:0;
 }
-.raitingSection{
+.raitingSection {
   margin-bottom:62px;
 }
-.mobShow{
+.mobShow {
   display:none;
 }
-.reviews{
+.reviews {
   position:relative;
 }
-.reviews span{
+.reviews span {
   position:absolute;
   top:2px;
   left:85px;
@@ -95,14 +96,14 @@
   color:#A7A7A7;
 
 }
-.btnReviews{
+.btnReviews {
   background-color:transparent;
   border:none;
   margin-left:29px;
   cursor:pointer;
 
 }
-.btnStyle{
+.btnStyle {
   padding:14px 0;
   width:350px;
   display:block;
@@ -111,41 +112,41 @@
   line-height:24px;
   border-radius:30px;
 }
-@media(max-width:1140px){
-  .bookPage{
-    padding:0  64px 42px 64px;
+
+@media (max-width:1140px) {
+  .bookPage {
+    padding:0 64px 42px 64px;
+
   }
-  .aloneBook{
+  .imgBook {
     width:136px;
-    border-radius:5px;
     min-height:198px;
   }
-
+  .imgBook .aloneImg {
+    width:136px;
+    border-radius:5px;
+  }
 }
 
-@media(max-width:768px){
-  .bookPage{
-    padding:0  64px 48px 64px;
+@media (max-width:768px) {
+  .bookPage {
+    padding:0 64px 48px 64px;
   }
-  .bookWrapper{
+  .bookWrapper {
     display:block;
     margin-bottom:52px;
   }
-  .aloneBook{
-      float:left;
-      margin-right:32px;
-  }
-  .imgBook{
+  .imgBook {
     float:left;
     margin-right:32px;
   }
-  .titleBook{
+  .titleBook {
     font-weight:700;
     font-size:24px;
     line-height:30px;
 
   }
-  .author{
+  .author {
     font-weight:600;
     font-size:14px;
     line-height:18px;
@@ -155,62 +156,65 @@
     width:306px;
     margin-bottom:48px;
   }
-  .aboutTitle{
+  .aboutTitle {
     font-weight:600;
     font-size:16px;
     line-height:24px;
   }
-  .titleSection{
+  .titleSection {
     font-weight:600;
     font-size:16px;
     line-height:24px;
 
   }
-  .raitingSection{
+  .raitingSection {
     margin-bottom:54px;
   }
-  .reviews span{
+  .reviews span {
     display:none;
   }
   .btnStyle {
     width:100%;
   }
 }
-@media(max-width:650px){
-  .bookPage{
-    padding:0  16px 48px 16px;
+
+@media (max-width:650px) {
+  .bookPage {
+    padding:0 16px 48px 16px;
   }
 }
-@media(max-width:500px){
-  .imgBook{
-    float:none;
-  }
-  .aloneBook{
+
+@media (max-width:500px) {
+  .imgBook {
+    margin:0 auto 16px auto;
     width:188px;
     min-height:260px;
-    margin:0 auto 16px auto;
-      border-radius: 10px;
-      float:none;
+    float:none;
   }
-  .titleBook{
+  .imgBook .aloneImg {
+    width:188px;
+    border-radius:10px;
+  }
+  .titleBook {
     font-weight:700;
     font-size:18px;
     line-height:28px;
     margin-bottom:8px;
   }
-  .author{
+  .author {
     font-weight:400;
     font-size:12px;
     margin-bottom:42px;
   }
-  .titleSection{
+  .titleSection {
     font-weight:700;
     font-size:18px;
     line-height:28px;
   }
 }
-@media(max-width:400px){
-  .btnBook{
+
+@media (max-width:400px) {
+  .btnBook {
     width:100%;
     font-weight:600;
     font-size:12px;
@@ -219,32 +223,32 @@
     padding-bottom:11px;
     margin-bottom:42px;
   }
-  .aboutTitle{
+  .aboutTitle {
     font-weight:700;
     font-size:18px;
     line-height:28px;
     margin-bottom:16px;
   }
-  .about{
+  .about {
     font-weight:400;
     font-size:12px;
     line-height:18px;
   }
-  .bookWrapper{
+  .bookWrapper {
     margin-bottom:42px;
   }
-  .bookRaiting{
+  .bookRaiting {
     gap:12px;
 
   }
-  .mobHidden{
+  .mobHidden {
     display:none;
   }
-  .mobShow{
+  .mobShow {
     display:block;
     position:relative;
   }
-  .mobShow span{
+  .mobShow span {
     font-weight:700;
     font-size:18px;
     line-height:28px;
@@ -254,7 +258,7 @@
     left:211px
 
   }
-  .bookPage{
+  .bookPage {
     padding-bottom:20px;
   }
   .btnStyle {
@@ -263,7 +267,7 @@
     padding-top:11px;
     padding-bottom:11px;
   }
-  .titleSection:after{
+  .titleSection:after {
     width:280px;
   }
 }
