@@ -36,7 +36,6 @@ export const BookPage = () => {
                                 arrImgs.length===1 ?<img className={s.aloneBook} alt="обложка книги" src={arrImgs[0]}/>
                                 :  <div className={s.imgBook}><BookSlider id={id}/>  </div>
                         }
-                        <InstIcon/>
                         <div className={s.bookContent}>
                             <h2 className={s.titleBook}>Грокаем алгоритмы. Иллюстрированное пособие
                                 для
