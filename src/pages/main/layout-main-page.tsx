@@ -5,6 +5,8 @@ import {Sidebar} from './sidebar/sidebar';
 
 import s from './main-page.module.css';
 
+
+
 export const LayoutMainPage = () => (
     <section className={s.mainPage}>
         <Sidebar/>

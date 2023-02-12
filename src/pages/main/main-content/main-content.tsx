@@ -1,24 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import defaultImg from '../../../assets/default-image .jpg'
-import {books} from '../../../assets/mocks';
 import {Button} from '../../../common/button/button';
 import {Raiting} from '../../../common/raiting/raiting';
+import {useAppDispatch, useAppSelector} from '../../../redux/redux-store';
+import {getBooks} from '../../../slices/book-slicer';
 import {Settings} from '../settings/settings';
 
 import s from './main-content.module.css'
 
+type Images={
+    url:string
+}
+
+
+
 export const MainContent = () => {
     const [btnToggleBlock, setBtnToggleBlock] = useState(true)
     const [btnToggleList, setBtnToggleList] = useState(false)
+    const dispatch=useAppDispatch();
+    const books=useAppSelector((state)=>state.book.books)
 
-    function Image(imgages:string[]){
-            if (imgages.length===0) {
+    useEffect(()=>{
+        dispatch(getBooks())
+    },[dispatch])
+
+    function Image(images:Images[]){
+            if (images.length===0) {
                 return defaultImg;
             }
-            if(imgages.length>0)
-            return imgages[0];
+            if(images.length>0)
+            return images[0].url;
 
         }
 
@@ -28,14 +41,14 @@ export const MainContent = () => {
             <Settings btnToggleList={btnToggleList} setBtnToggleList={setBtnToggleList}
                       btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock}/>
             <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
-                {books.map(m => (
-                    <NavLink key={m.id} to={`/books/${m.category}/${m.id}`}>
+                {books?.map(m => (
+                    <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}>
                         <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
                              data-test-id='card'
                         >
-                            <img alt={m.title} src={Image(m.image)}
+                            <img alt={m.title} src={Image(m.images)}
                                  className={btnToggleList ? s.inlineCoverBook : s.coverBook}/>
-                            {m.rating !== 0 ?
+                            {m.rating !== null ?
                                 <Raiting className={btnToggleList ? s.inlineRaiting : ''}
                                          value={m.rating}/> :
                                 <div
@@ -44,11 +57,8 @@ export const MainContent = () => {
 
                             <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{m.title}</h4>
 
-                            <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.author}, {m.year} </h5>
-                            <Button  onClick={(e:any)=> e.preventDefault()} className={btnToggleList ? s.inlineBtn : ''} btnToggleList={btnToggleList}
-                                    name={m.bookedTill ? `Занята до ${m.bookedTill}`
-                                        : !m.isBooked ? 'Забронировать' : 'Забронирована'}
-                            />
+                            <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.authors}, {m.issueYear} </h5>
+
 
                         </div>
                     </NavLink>
@@ -59,7 +69,10 @@ export const MainContent = () => {
     )
 }
 
-
+// {/*<Button  onClick={(e:any)=> e.preventDefault()} className={btnToggleList ? s.inlineBtn : ''} btnToggleList={btnToggleList}*/}
+// {/*        name={m.bookedTill ? `Занята до ${m.bookedTill}`*/}
+// {/*            : !m.isBooked ? 'Забронировать' : 'Забронирована'}*/}
+// {/*/>*/}
 
 
 

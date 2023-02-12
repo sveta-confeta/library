@@ -2,11 +2,15 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {AnyAction, combineReducers, configureStore} from '@reduxjs/toolkit';
 
-import {appReducer} from '../reducers/app-reduser';
+import {appSlice} from '../slices/app-slice';
+import {bookSlider} from '../slices/book-slicer';
+
+
 
 
 const rootReducer = combineReducers({
-    app:appReducer,
+    app:appSlice,
+    book:bookSlider,
 
 })
 
