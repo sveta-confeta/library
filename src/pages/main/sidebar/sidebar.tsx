@@ -3,8 +3,8 @@ import {NavLink, useLocation} from 'react-router-dom';
 
 import arrowBottom from '../../../assets/stroke-bottom.svg'
 import arrowTop from '../../../assets/stroke-top.svg'
-import {setMenuActive} from '../../../reducers/app-reduser';
 import {useAppDispatch, useAppSelector} from '../../../redux/redux-store';
+import {setMenuActive} from '../../../slices/app-slice';
 
 import {Navbar} from './navbar/navbar';
 
@@ -26,7 +26,7 @@ export const Sidebar = () => {
     }
 
     useEffect(() => {
-        window.addEventListener("resize", handleResize)
+        window.addEventListener('resize', handleResize)
 
 
     },[])
@@ -54,6 +54,7 @@ export const Sidebar = () => {
     useEffect(()=>{
 
         document.addEventListener('mousedown', handlerMenuOutside)
+
          return ()=>document.removeEventListener('mousedown', handlerMenuOutside)
     })
 

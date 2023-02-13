@@ -2,9 +2,9 @@ import React  from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import avatar from '../../assets/avatar.jpg'
-import logo from '../../assets/logo.png'
-import {setMenuActive} from '../../reducers/app-reduser';
+import logo from '../../assets/logo.png';
 import {useAppDispatch, useAppSelector} from '../../redux/redux-store';
+import {setMenuActive} from '../../slices/app-slice';
 
 import s from './header.module.css'
 

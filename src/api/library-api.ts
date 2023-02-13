@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-    withCredentials: true,
+    withCredentials: false,
     baseURL:'https://strapi.cleverland.by/api/',
 })
 
@@ -14,7 +14,7 @@ export const libraryApi = {
     getBook() {
         return instance.get(`books/${1}`)
     },
-    getcategories() {
+    getCategories() {
         return instance(`categories`)
     }
 }
@@ -33,10 +33,14 @@ export type BookType = {
     ISBN: string
     producer: string
     authors: string[]
-    images: [{ url: string }]
-    categories: string[],
+    image:imageBook
+    categories: string[]
     comments: null
     booking: null
-    delivery: null
+    delivery: null | {dateHandedFrom:string}
     histories: null
+}
+
+export type imageBook={
+    url:string
 }

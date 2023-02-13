@@ -1,42 +1,38 @@
-import {Action, createAsyncThunk, createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+
 
 import {BookType, libraryApi} from '../api/library-api';
 
 
+export const booksThunk = createAsyncThunk<BookType[]>('books/booksThunk', async (param, thunkAPI) => {
+    const res = await libraryApi.getBooks()
+    return res.data;
+
+})
+
+
+
+
 const initialState = {
-    books: [] as BookType[]
+    books: [] as BookType[] |null
 }
 
-export const getBooks = createAsyncThunk('books/getBooks', async (data, {
-    rejectWithValue,
-    dispatch
-}) => {
-    const res = await libraryApi.getBooks();
-
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    dispatch(setBooks(res.data))
-})
 
 export const slice = createSlice({
     name: 'books',
     initialState,
     reducers: {
-        setBooks(state, action: PayloadAction<BookType[]>) {
-            // eslint-disable-next-line no-param-reassign
-            state.books = action.payload
-        },
     },
-    extraReducers: {
-        // [getBooks.fulfilled]: () => {
-        // },
-        // [getBooks.pending]: () => {
-        // },
-        // [getBooks.rejected]: () => {
-        // },
-    }
+    extraReducers: (builder)=> {
+        builder.addCase(booksThunk.fulfilled, (state, action) => {
+            state.books=action.payload;
+        })
 
-
+        }
 })
+
+
+
+
 export const bookSlider = slice.reducer;
-export const {setBooks} = slice.actions
 

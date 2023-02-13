@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Outlet} from 'react-router-dom';
 
 import {Sidebar} from './sidebar/sidebar';
 
 import s from './main-page.module.css';
+import {booksThunk} from "../../slices/book-slicer";
+import {useAppDispatch} from "../../redux/redux-store";
 
 
 
-export const LayoutMainPage = () => (
-    <section className={s.mainPage}>
-        <Sidebar/>
-        <Outlet/>
+export const LayoutMainPage = () => {
+    const dispatch=useAppDispatch();
+    useEffect(()=>{
+        dispatch(booksThunk())
+
+    },[])
+    return (
+        <section className={s.mainPage}>
+            <Sidebar/>
+            <Outlet/>
         </section>
-);
+
+    )
+}
+
+

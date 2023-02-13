@@ -5,6 +5,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 const initialState={
     menuActive:false ,
     status:'init' as StatusType,
+    error:null as null |string,
 }
 
 export const slice=createSlice({
@@ -18,6 +19,10 @@ export const slice=createSlice({
         setStatus(state,action:PayloadAction<StatusType>){
             // eslint-disable-next-line no-param-reassign
             state.status=action.payload
+        },
+        setError(state,action:PayloadAction<null | string>){
+            // eslint-disable-next-line no-param-reassign
+            state.error=action.payload
         }
     }
 

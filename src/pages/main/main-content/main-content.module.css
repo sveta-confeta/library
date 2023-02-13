@@ -38,6 +38,9 @@
 
 }
 .coverBook {
+  width:174px;
+  height:242px;
+  object-fit:cover;
   border-radius:10px;
   border:1px solid #c2c2c2;
   display:block;
@@ -45,6 +48,9 @@
 
 }
 .inlineCoverBook {
+  width:120px;
+  height:170px;
+  object-fit:cover;
   display:block;
   grid-area:i;
 

@@ -16,7 +16,7 @@ export const Footer = () => (
         <div className={s.footerWrapper}>
             <p className={s.law}>© 2020-2023 Cleverland. Все права защищены.</p>
             <div className={s.socWrapper}>
-                {socIcons.map<JSX.Element>(m => <a href='#' className={s.socIcon}>{m}</a>)}
+                {socIcons.map<JSX.Element>((m,ind) => <a key={ind} href='#' className={s.socIcon}>{m}</a>)}
             </div>
         </div>
 
