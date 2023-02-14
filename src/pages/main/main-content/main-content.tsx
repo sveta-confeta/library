@@ -29,7 +29,7 @@ export const MainContent = () => {
                 {books && books.map(m =>{
                     debugger
                     return(
-                        <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}>
+                        <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}  >
                             <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
                             >
                                 <img src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}

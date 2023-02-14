@@ -11,8 +11,8 @@ export const libraryApi = {
     getBooks() {
         return instance.get<BookType[]>(`books`)
     },
-    getBook() {
-        return instance.get(`books/${1}`)
+    getBook(id:number) {
+        return instance.get<BookType>(`books/${id}`)
     },
     getCategories() {
         return instance(`categories`)
