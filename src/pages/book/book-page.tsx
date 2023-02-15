@@ -15,26 +15,26 @@ import s from './book-page.module.css'
 import defaultImg from '../../assets/default-image .jpg'
 import {bookThunk} from "../../slices/book-slicer";
 import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
-import {BookType} from "../../api/library-api";
+import {CurrentBookType} from "../../api/library-api";
+
 
 
 export const BookPage = () => {
     const {id} = useParams();
-    const dispatch = useAppDispatch();
-    const book:BookType | null =useAppSelector(state=> state.book.book)
-    // const images: BooksType = books.find(el => id === el.id)!;
-    // const arrImgs: string[] = images.image!;
-
-
     const [openReviews, setOpenReviews] = useState(false)
+    const dispatch = useAppDispatch();
+    const book:CurrentBookType = useAppSelector(state => state.book.book)
+    debugger
+
 
     useEffect(() => {
         if (id) {
-
             dispatch(bookThunk(Number(id)))
         }
 
-    },[id])
+    }, [id])
+
+
 
 
     return (
@@ -43,51 +43,60 @@ export const BookPage = () => {
             <section className={s.bookPage}>
                 <div className={s.bookPageContainer}>
                     <div className={s.bookWrapper}>
-                        {/*<div className={s.imgBook}>*/}
-                        {/*    {arrImgs.length === 0 ?*/}
-                        {/*        <img className={s.aloneImg} alt="обложка книги" src={defaultImg}/> :*/}
-                        {/*        arrImgs.length === 1 ?*/}
-                        {/*            <img className={s.aloneImg} alt="обложка книги"*/}
-                        {/*                 src={arrImgs[0]}/>*/}
-                        {/*            : <BookSlider arrImgs={arrImgs}/>*/}
-                        {/*    }*/}
-                        {/*</div>*/}
+                        <div className={s.imgBook}>
+                            {book.images.length == 0 ?
+                                <img className={s.aloneImg} alt="обложка книги" src={defaultImg}/>
+                                : book.images.length === 1 ?
+                                    <img className={s.aloneImg} alt="обложка книги"
+                                         src={`https://strapi.cleverland.by${book.images[0].url}`}/> :
+
+                                    <BookSlider arrImgs={book.images}/>
+                            }
+
+                        </div>
                         <div className={s.bookContent}>
-                            <h2 className={s.titleBook}>{book?.title}</h2>
-                            <h3 className={s.author}>{`${book?.authors}, ${book?.issueYear} `}</h3>
+                            <h2 className={s.titleBook}>{book.title}</h2>
+                            <h3 className={s.author}>{`${book.authors}, ${book.issueYear} `}</h3>
                             <Button name="Забронировать" className={s.btnBook}/>
                             <h4 className={s.aboutTitle}>O книге</h4>
-                            <p className={`${s.about} ${s.firstP}`}>{book?.description}</p>
+                            <p className={`${s.about} ${s.firstP}`}>{book.description}</p>
                         </div>
                     </div>
-                {/*    <div className={s.raitingSection}>*/}
-                {/*        <h4 className={s.titleSection}>Рейтинг</h4>*/}
-                {/*        <div className={s.mobHidden}><Raiting value={4}/></div>*/}
-                {/*        <div className={s.mobShow}><Raiting height='34' width='34' value={0}*/}
-                {/*                                            className={s.bookRaiting}/>*/}
-                {/*            <span>4.3</span></div>*/}
-                {/*    </div>*/}
-                {/*    <div className={s.infoSection}>*/}
-                {/*        <h4 className={s.titleSection}>Подробная информация</h4>*/}
-                {/*        <Table/>*/}
-                {/*    </div>*/}
-                {/*    <div className={s.reviewsSection}>*/}
-                {/*        <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span>2</span>*/}
-                {/*            <button data-test-id='button-hide-reviews'*/}
-                {/*                    onClick={() => setOpenReviews(!openReviews)}*/}
-                {/*                    className={s.btnReviews} type="button">*/}
-                {/*                {openReviews ? <BottomIcon fill='#363636'/> :*/}
-                {/*                    <TopIcon fill='#363636'/>}*/}
-                {/*            </button>*/}
-                {/*        </h4>*/}
-                {/*        {openReviews*/}
-                {/*            ?*/}
-                {/*            <Reviews/>*/}
-                {/*            : ''}*/}
+                    <div className={s.raitingSection}>
+                        <h4 className={s.titleSection}>Рейтинг</h4>
+                      <div className={s.mobHidden}>{book.rating ?
+                       <Raiting value={book.rating}/> : <Raiting value={0}/> }
 
-                {/*    </div>*/}
-                {/*    <Button data-test-id='button-rating' className={s.btnStyle}*/}
-                {/*            name='оценить книгу'/>*/}
+
+                    {/*    /!*<div className={s.mobShow}><Raiting height='34' width='34' value={0}*!/*/}
+                    {/*    /!*                                    className={s.bookRaiting}/>*!/*/}
+                           <span>{!book.rating ? "" : book.rating}</span></div>
+                    </div>
+
+                    <div className={s.infoSection}>
+                       <h4 className={s.titleSection}>Подробная информация</h4>
+                         {/*@ts-ignore*/}
+                        <Table/>
+                    </div>
+
+
+                    <div className={s.reviewsSection}>
+                        <h4 className={`${s.titleSection} ${s.reviews}`}>Отзывы <span>2</span>
+                            <button
+                                    onClick={() => setOpenReviews(!openReviews)}
+                                    className={s.btnReviews} type="button">
+                                {openReviews ? <BottomIcon fill='#363636'/> :
+                                    <TopIcon fill='#363636'/>}
+                            </button>
+                        </h4>
+                        {openReviews
+                            ?
+                            <Reviews/>
+                            : ''}
+
+                    </div>
+                    <Button  className={s.btnStyle}
+                            name='оценить книгу'/>
 
                 </div>
             </section>

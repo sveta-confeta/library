@@ -2,6 +2,9 @@
 .reviews li{
   margin-bottom:42px;
 }
+.worn{
+  margin-bottom:40px;
+}
 
 @media(max-width:400px) {
   .reviews li:nth-last-child{

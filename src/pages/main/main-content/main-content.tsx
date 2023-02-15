@@ -27,7 +27,6 @@ export const MainContent = () => {
                       btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock}/>
             <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
                 {books && books.map(m =>{
-                    debugger
                     return(
                         <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}  >
                             <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
@@ -35,7 +34,7 @@ export const MainContent = () => {
                                 <img src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}
 
                                      className={btnToggleList ? s.inlineCoverBook : s.coverBook}/>
-                                {m.rating !== null ?
+                                {m.rating ?
                                     <Raiting className={btnToggleList ? s.inlineRaiting : ''}
                                              value={m.rating}/> :
                                     <div

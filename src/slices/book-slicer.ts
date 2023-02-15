@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 
-import {BookType, libraryApi} from '../api/library-api';
+import {BookType, CurrentBookType, libraryApi} from '../api/library-api';
 
 
 export const booksThunk = createAsyncThunk<BookType[]>('books/booksThunk', async (param, thunkAPI) => {
@@ -19,7 +19,8 @@ export const bookThunk = createAsyncThunk('books/bookThunk', async (id:number, t
 
 const initialState = {
     books: [] as BookType[] | null,
-    book: {}  as BookType | null
+    book: {}  as CurrentBookType
+
 }
 
 
@@ -33,6 +34,7 @@ export const slice = createSlice({
         });
         builder.addCase(bookThunk.fulfilled, (state, action) => {
                 state.book = action.payload;
+
             });
 
     }

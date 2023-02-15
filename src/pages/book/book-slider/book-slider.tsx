@@ -4,8 +4,6 @@ import SwiperCore, {FreeMode, Navigation, Pagination, Thumbs} from 'swiper';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {Swiper, SwiperSlide} from 'swiper/react';
 
-import {books, BooksType} from '../../../assets/mocks';
-
 import s from './book-slider.module.css';
 
 import 'swiper/css';
@@ -13,11 +11,12 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
+import {imageBook} from "../../../api/library-api";
 
 SwiperCore.use([Navigation, Pagination,]);
 
 type BookSliderType = {
-    arrImgs:string[]
+    arrImgs?:imageBook[]
 }
 
 export default function BookSlider(props: BookSliderType) {
@@ -68,9 +67,9 @@ export default function BookSlider(props: BookSliderType) {
 
 
 
-                {props.arrImgs.map((m) => (
+                {props.arrImgs?.map((m) => (
                     <SwiperSlide className={s.sliderImg}>
-                        <img src={m} alt='обложка выбранной книги'/>
+                        <img src={`https://strapi.cleverland.by${m.url}`} alt='обложка выбранной книги'/>
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -79,7 +78,7 @@ export default function BookSlider(props: BookSliderType) {
                 loop={true}
                 onSwiper={setThumbsSwiper}
                 spaceBetween={30}
-                slidesPerView={props.arrImgs.length}
+                slidesPerView={props.arrImgs?.length}
                 watchSlidesProgress={true}
                 scrollbar={{draggable: true}}
                 slideVisibleClass={s.slideVisible}
@@ -87,10 +86,10 @@ export default function BookSlider(props: BookSliderType) {
                 grabCursor={true}
                 modules={[ Navigation, Thumbs]}
                 className={s.swiperStyleThumbs}>
-                {props.arrImgs.map((m, ind) => (
+                {props.arrImgs?.map((m, ind) => (
                     <SwiperSlide onClick={() => slideTo(ind)}>
                         <div className={ind === swiperActiveIndex ? s.sliderActive : s.imgWrapper}>
-                            <img src={m} alt='обложка выбранной книги'/>
+                            <img src={`https://strapi.cleverland.by${m.url}`} alt='обложка выбранной книги'/>
                         </div>
                     </SwiperSlide>
                 ))}

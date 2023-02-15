@@ -2,10 +2,10 @@ import React from 'react';
 
 import s from './raiting.module.css'
 
-export type RaitingValueType=0|1|2|3|4|5;
+
 
 type RaitingPropsType={
-    value:RaitingValueType
+     value:number
     className?:string
     height?:string
     width?:string
@@ -16,8 +16,8 @@ export function Raiting(props:RaitingPropsType) {
 
     return (
         <div className={`${s.raitingStarts} ${props.className} `}>
-            {valueStars.map(m => (
-                    <Star  selected={props.value > m} height={props.height ? props.height :'27px'} width={props.width ? props.width :'27px'} fillColor='#FFBC1F' emptyColor='none' />
+            {valueStars.map((m,ind) => (
+                    <Star key={ind}  selected={props.value > m} height={props.height ? props.height :'27px'} width={props.width ? props.width :'27px'} fillColor='#FFBC1F' emptyColor='none' />
                 ))}
         </div>
     )

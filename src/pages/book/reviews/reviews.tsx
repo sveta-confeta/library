@@ -1,22 +1,27 @@
 import React from 'react';
 
-import {readers} from '../../../assets/mocks';
-
 import {Review} from './review/review';
 
 import s from './reviews.module.css'
+import {CurrentBookType} from "../../../api/library-api";
+import {useAppSelector} from "../../../redux/redux-store";
 
-export const Reviews = () => (
+export const Reviews = () =>{
+    const book:CurrentBookType = useAppSelector(state => state.book.book)
+ return (
+
     <div className={s.reviewsWrapper}>
         {
-            readers.map(m => (
-                <ul className={s.reviews} >
-                    <Review readerName={m.readerName} data={m.data} raiting={m.raiting}
+            book.comments ?
+            book.comments.map(m => (
+                <ul key={m.id} className={s.reviews} >
+                    <Review firstName={m.user.firstName} lastName={m.user.lastName} data={m.createdAt} raiting={m.raiting}
                             text={m.text}/>
                 </ul>
             ))
+                : <p className={s.worn}> Oтзывов еще нет.</p>
         }
 
 
     </div>
-);
+)}

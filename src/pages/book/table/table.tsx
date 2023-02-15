@@ -1,8 +1,15 @@
 import React from 'react';
 
 import s from './table.module.css'
+import {CurrentBookType} from "../../../api/library-api";
+import {useAppSelector} from "../../../redux/redux-store";
 
-export const Table = () => (
+
+export const Table = () =>{
+    const book: CurrentBookType = useAppSelector(state => state.book.book)
+
+    return(
+        book ?
         <div className={s.tablesBook}>
             <div className={s.tableOne}>
                 <ul>
@@ -13,11 +20,11 @@ export const Table = () => (
                     <li>Формат</li>
                 </ul>
                 <ul>
-                    <li>Питеp</li>
-                    <li>2019</li>
-                    <li>288</li>
-                    <li>Мягкая обложка</li>
-                    <li>70х100</li>
+                    <li>{book.publish}</li>
+                    <li>{book.issueYear}</li>
+                    <li>{book.pages}</li>
+                    <li>{book.cover}</li>
+                    <li>{book.format}</li>
                 </ul>
             </div>
             <div className={s.tableTwo}>
@@ -30,16 +37,16 @@ export const Table = () => (
                 </ul>
                 <ul>
                     <li className={s.mobHidden}>Компьютерная литература</li>
-                    <li>370г</li>
-                    <li>978-5-4461-0923-4</li>
+                    <li>{book.weight}г</li>
+                    <li>{book.ISBN}</li>
                     <li className={s.mobShow}>16+</li>
-                    <li className={s.position}>ООО «Питер Мейл». РФ, 198206, <wbr/> г.Санкт&nbsp;-&nbsp;Петербург, Петергофское&nbsp;ш,&nbsp;д.73, лит.
-                        А29
+                    <li className={s.position}>{book.producer}
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> :""
     )
-;
+    ;
+}
 
 
