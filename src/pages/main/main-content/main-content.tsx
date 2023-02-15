@@ -10,6 +10,7 @@ import {Settings} from '../settings/settings';
 
 import s from './main-content.module.css'
 import {imageBook} from "../../../api/library-api";
+import {Preloader} from "../../../utils/Preloader";
 
 
 
@@ -18,6 +19,7 @@ export const MainContent = () => {
     const [btnToggleList, setBtnToggleList] = useState(false)
 
     const books=useAppSelector((state)=>state.book.books)
+    const isFetching=useAppSelector(state=> state.app.isFetching)
 
 
 
@@ -25,42 +27,40 @@ export const MainContent = () => {
         <React.Fragment>
             <Settings btnToggleList={btnToggleList} setBtnToggleList={setBtnToggleList}
                       btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock}/>
-            <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
-                {books && books.map(m =>{
-                    return(
-                        <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}  >
-                            <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
-                            >
-                                <img src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}
+            {isFetching && <Preloader/> }
+                <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
+                    {books && books.map(m =>{
+                            return(
+                                <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}  >
+                                    <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
+                                    >
+                                        <img src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}
 
-                                     className={btnToggleList ? s.inlineCoverBook : s.coverBook}/>
-                                {m.rating ?
-                                    <Raiting className={btnToggleList ? s.inlineRaiting : ''}
-                                             value={m.rating}/> :
-                                    <div
-                                        className={btnToggleList ? s.inlineRaitingNone : s.raitingNone}>ещё
-                                        нет оценок</div>}
+                                             className={btnToggleList ? s.inlineCoverBook : s.coverBook}/>
+                                        {m.rating ?
+                                            <Raiting className={btnToggleList ? s.inlineRaiting : ''}
+                                                     value={m.rating}/> :
+                                            <div
+                                                className={btnToggleList ? s.inlineRaitingNone : s.raitingNone}>ещё
+                                                нет оценок</div>}
 
-                                <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{m.title}</h4>
+                                        <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{m.title}</h4>
 
-                                <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.authors}, {m.issueYear} </h5>
-                                <Button  onClick={(e:any)=> e.preventDefault()} className={btnToggleList ? s.inlineBtn : ''} btnToggleList={btnToggleList}
-                                         name={m.booking ? "Забронирован" :""  ||  m.delivery ? `Занята до ${m.delivery?.dateHandedFrom}` : "" || 'Забронировать'}/>
-
-
-
-                            </div>
-                        </NavLink>
-                    )
-                    }
+                                        <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.authors}, {m.issueYear} </h5>
+                                        <Button  onClick={(e:any)=> e.preventDefault()} className={btnToggleList ? s.inlineBtn : ''} btnToggleList={btnToggleList}
+                                                 name={m.booking ? "Забронирован" :""  ||  m.delivery ? `Занята до ${m.delivery?.dateHandedFrom}` : "" || 'Забронировать'}/>
 
 
 
+                                    </div>
+                                </NavLink>
+                            )
+                        }
+                    )}
+
+                </main>
 
 
-                )}
-
-            </main>
         </React.Fragment>
     )
 }

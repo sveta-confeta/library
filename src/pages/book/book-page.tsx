@@ -16,6 +16,7 @@ import defaultImg from '../../assets/default-image .jpg'
 import {bookThunk} from "../../slices/book-slicer";
 import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
 import {CurrentBookType} from "../../api/library-api";
+import {Preloader} from "../../utils/Preloader";
 
 
 
@@ -24,7 +25,8 @@ export const BookPage = () => {
     const [openReviews, setOpenReviews] = useState(false)
     const dispatch = useAppDispatch();
     const book:CurrentBookType = useAppSelector(state => state.book.book)
-    debugger
+    const isFetching=useAppSelector(state=> state.app.isFetching)
+
 
 
     useEffect(() => {
@@ -40,6 +42,7 @@ export const BookPage = () => {
     return (
         <React.Fragment>
             <BreadCrumb/>
+            {isFetching && <Preloader/> }
             <section className={s.bookPage}>
                 <div className={s.bookPageContainer}>
                     <div className={s.bookWrapper}>
