@@ -5,7 +5,7 @@ import defaultImg from '../../../assets/default-image .jpg'
 import {Button} from '../../../common/button/button';
 import {Raiting} from '../../../common/raiting/raiting';
 import {useAppDispatch, useAppSelector} from '../../../redux/redux-store';
-import {booksThunk} from '../../../slices/book-slicer';
+
 import {Settings} from '../settings/settings';
 
 import s from './main-content.module.css'
@@ -34,7 +34,7 @@ export const MainContent = () => {
                 <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
                     { books.map(m =>{
                             return(
-                                <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}  >
+                                <NavLink key={m.id} to={`/books/${m.categories[0]}/${m.id}`}  >
                                     <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
                                     >
                                         <img src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}

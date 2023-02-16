@@ -4,7 +4,7 @@ import {Outlet} from 'react-router-dom';
 import {Sidebar} from './sidebar/sidebar';
 
 import s from './main-page.module.css';
-import {booksThunk} from "../../slices/book-slicer";
+import {booksAndCategoryThunk} from "../../slices/book-slicer";
 import {useAppDispatch} from "../../redux/redux-store";
 
 
@@ -12,7 +12,8 @@ import {useAppDispatch} from "../../redux/redux-store";
 export const LayoutMainPage = () => {
     const dispatch=useAppDispatch();
     useEffect(()=>{
-        dispatch(booksThunk())
+        // dispatch(booksThunk())
+        dispatch(booksAndCategoryThunk())
 
     },[])
     return (

@@ -17,6 +17,7 @@ import {bookThunk} from "../../slices/book-slicer";
 import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
 import {CurrentBookType} from "../../api/library-api";
 import {Preloader} from "../../utils/Preloader";
+import {Error} from "../../utils/error/error";
 
 
 
@@ -26,6 +27,7 @@ export const BookPage = () => {
     const dispatch = useAppDispatch();
     const book:CurrentBookType = useAppSelector(state => state.book.book)
     const isFetching=useAppSelector(state=> state.app.isFetching)
+    const errorFlag=useAppSelector(state=>state.app.error)
 
 
 
@@ -33,8 +35,8 @@ export const BookPage = () => {
         if (id) {
             dispatch(bookThunk(Number(id)))
         }
-
-    }, [id])
+debugger
+    }, [])
 
 
 
@@ -42,6 +44,7 @@ export const BookPage = () => {
     return (
         <React.Fragment>
             <BreadCrumb/>
+            {errorFlag && <Error/>}
             {isFetching && <Preloader/> }
             <section className={s.bookPage}>
                 <div className={s.bookPageContainer}>
@@ -51,9 +54,9 @@ export const BookPage = () => {
                                 <img className={s.aloneImg} alt="обложка книги" src={defaultImg}/>
                                 : book.images.length === 1 ?
                                     <img className={s.aloneImg} alt="обложка книги"
-                                         src={`https://strapi.cleverland.by${book.images[0].url}`}/> :
+                                         src={`https://strapi.cleverland.by${book.images[0].url}`}/> :""
 
-                                    <BookSlider arrImgs={book.images}/>
+                                    // <BookSlider arrImgs={book.images}/>
                             }
 
                         </div>

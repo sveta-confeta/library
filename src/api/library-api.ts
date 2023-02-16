@@ -109,3 +109,14 @@ export type ErrorType = {
     "details": {}
 
 }
+export type  CategoriesType={
+    name:string
+    path:string
+    id: number
+}
+
+    // "name":"Бизнес",
+    // "path":"business",
+    // "id": 1,
+
+
