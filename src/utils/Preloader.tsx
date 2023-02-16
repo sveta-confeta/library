@@ -3,6 +3,8 @@ import React from 'react';
 
 export const Preloader = () => {
     return (
+
+
         <svg style={{position: 'absolute', left: '50%', top: '50%',margin: "auto", background: "none", display: "block",shapeRendering:"auto"}}
              xmlns="http://www.w3.org/2000/svg"
              width="64px" height="64px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -13,7 +15,6 @@ export const Preloader = () => {
                                   keyTimes="0;1"></animateTransform>
             </circle>
         </svg>
-
     );
 };
 

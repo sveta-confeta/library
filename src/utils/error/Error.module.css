@@ -1,0 +1,65 @@
+.error{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:-28px;
+  padding:24px 32px;
+  margin:auto;
+  background:#FEEBEA;
+  display:flex;
+  width:1110px;
+  min-height:64px;
+  border:1px solid #F42C4F;
+  z-index:20;
+  align-items:center;
+  justify-content:space-between;
+}
+.wornWrapper{
+  display:flex;
+  align-items:center;
+}
+.wornText{
+  font-weight:600;
+  font-size:16px;
+  line-height:24px;
+  margin-left:24px;
+}
+.close{
+  cursor:pointer;
+}
+@media (max-width:1140px) {
+  .error{
+    width:640px;
+    padding:24px 16px;
+  }
+  .worn{
+    width:24px;
+    height:24px;
+  }
+  .wornText{
+    font-size:14px;
+    line-height:18px;
+    margin-left:12px;
+  }
+}
+@media (max-width:680px) {
+  .error{
+    width:280px;
+    padding:12px 16px;
+    align-items:start;
+  }
+  .wornWrapper{
+    align-items:start;
+  }
+  .wornText{
+    font-size:14px;
+    line-height:18px;
+    margin-left:12px;
+    max-width:186px;
+  }
+  .close{
+    width:16px;
+    height:16px;
+    margin-left:10px;
+  }
+}

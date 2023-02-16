@@ -5,7 +5,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 const initialState={
     menuActive:false ,
     status:'init' as StatusType,
-    error:null as null |string,
+    error:false,
     isFetching:false,
 }
 
@@ -19,7 +19,7 @@ export const slice=createSlice({
         setStatus(state,action:PayloadAction<StatusType>){
             state.status=action.payload
         },
-        setError(state,action:PayloadAction<null | string>){
+        setError(state,action:PayloadAction<boolean>){
             state.error=action.payload
         },
         setIsFetching(state,action:PayloadAction<boolean>){

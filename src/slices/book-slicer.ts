@@ -1,18 +1,18 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 
-import {BookType, CurrentBookType, libraryApi} from '../api/library-api';
-import {setIsFetching} from "./app-slice";
+import {BookType, CurrentBookType, ErrorType, libraryApi} from '../api/library-api';
+import {setError, setIsFetching} from "./app-slice";
 
 
-export const booksThunk = createAsyncThunk<BookType[]>('books/booksThunk', async (param, thunkAPI) => {
+export const booksThunk = createAsyncThunk('books/booksThunk', async (param, thunkAPI) => {
     thunkAPI.dispatch(setIsFetching(true))
     const res = await libraryApi.getBooks()
-
     try {
         return res.data;
-    }
-finally {
+    } catch(error:any) {
+        thunkAPI.dispatch(setError(true));
+    } finally {
         thunkAPI.dispatch(setIsFetching(false))
     }
 
@@ -23,8 +23,7 @@ export const bookThunk = createAsyncThunk('books/bookThunk', async (id: number, 
     const res = await libraryApi.getBook(id)
     try {
         return res.data;
-    }
-    finally {
+    } finally {
         thunkAPI.dispatch(setIsFetching(false))
     }
 
@@ -32,7 +31,7 @@ export const bookThunk = createAsyncThunk('books/bookThunk', async (id: number, 
 
 
 const initialState = {
-    books: [] as BookType[] | null,
+    books: [] as BookType[] ,
     book: {} as CurrentBookType
 
 }
@@ -44,8 +43,7 @@ export const slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(booksThunk.fulfilled, (state, action) => {
-
-            state.books = action.payload;
+            state.books = action.payload!;
         });
         builder.addCase(bookThunk.fulfilled, (state, action) => {
             state.book = action.payload;

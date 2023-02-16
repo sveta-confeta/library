@@ -11,6 +11,7 @@ import {Settings} from '../settings/settings';
 import s from './main-content.module.css'
 import {imageBook} from "../../../api/library-api";
 import {Preloader} from "../../../utils/Preloader";
+import {Error} from "../../../utils/error/error";
 
 
 
@@ -20,16 +21,18 @@ export const MainContent = () => {
 
     const books=useAppSelector((state)=>state.book.books)
     const isFetching=useAppSelector(state=> state.app.isFetching)
+    const errorFlag=useAppSelector(state=>state.app.error)
 
 
 
     return (
         <React.Fragment>
+            {errorFlag && <Error/>}
             <Settings btnToggleList={btnToggleList} setBtnToggleList={setBtnToggleList}
                       btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock}/>
             {isFetching && <Preloader/> }
                 <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
-                    {books && books.map(m =>{
+                    { books.map(m =>{
                             return(
                                 <NavLink key={m.id} to={`/books/${m.categories}/${m.id}`}  >
                                     <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
