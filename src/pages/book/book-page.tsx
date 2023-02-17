@@ -31,12 +31,12 @@ export const BookPage = () => {
 
 
 
+
+
     useEffect(() => {
-        if (id) {
             dispatch(bookThunk(Number(id)))
-        }
-debugger
-    }, [])
+        debugger
+    }, [id])
 
 
 
@@ -50,16 +50,18 @@ debugger
                 <div className={s.bookPageContainer}>
                     <div className={s.bookWrapper}>
                         <div className={s.imgBook}>
-                            {book.images.length == 0 ?
+                            {book && book.images && book.images.length ===  0 ?
                                 <img className={s.aloneImg} alt="обложка книги" src={defaultImg}/>
                                 : book.images.length === 1 ?
-                                    <img className={s.aloneImg} alt="обложка книги"
-                                         src={`https://strapi.cleverland.by${book.images[0].url}`}/> :""
+                                     <img className={s.aloneImg} alt="обложка книги"
+                                         src={`https://strapi.cleverland.by${book.images[0].url}`}/> :
 
-                                    // <BookSlider arrImgs={book.images}/>
-                            }
+                                    <BookSlider arrImgs={book.images}/>  }
+                            {/*{book && book.images && book.images.length == 0 ? <img className={s.aloneImg} alt="обложка книги" src={defaultImg}/> : <img className={s.aloneImg} alt="обложка книги"*/}
+                            {/* src={`https://strapi.cleverland.by${book.images[0].url}`}/>}*!/  }*/}
+                                </div>
 
-                        </div>
+
                         <div className={s.bookContent}>
                             <h2 className={s.titleBook}>{book.title}</h2>
                             <h3 className={s.author}>{`${book.authors}, ${book.issueYear} `}</h3>

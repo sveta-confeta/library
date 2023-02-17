@@ -15,7 +15,7 @@ export const LayoutMainPage = () => {
         // dispatch(booksThunk())
         dispatch(booksAndCategoryThunk())
 
-    },[])
+    },[dispatch])
     return (
         <section className={s.mainPage}>
             <Sidebar/>

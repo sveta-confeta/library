@@ -115,8 +115,5 @@ export type  CategoriesType={
     id: number
 }
 
-    // "name":"Бизнес",
-    // "path":"business",
-    // "id": 1,
 
 

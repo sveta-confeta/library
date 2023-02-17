@@ -22,8 +22,7 @@ export const MainContent = () => {
     const books=useAppSelector((state)=>state.book.books)
     const isFetching=useAppSelector(state=> state.app.isFetching)
     const errorFlag=useAppSelector(state=>state.app.error)
-
-
+    const categories=useAppSelector(state =>state.book.category)
 
     return (
         <React.Fragment>
@@ -34,7 +33,7 @@ export const MainContent = () => {
                 <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
                     { books.map(m =>{
                             return(
-                                <NavLink key={m.id} to={`/books/${m.categories[0]}/${m.id}`}  >
+                                <NavLink key={m.id} to={`/books/${categories.find(f=> f.name === m.categories[0])?.path}/${m.id}`}  >
                                     <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
                                     >
                                         <img src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}

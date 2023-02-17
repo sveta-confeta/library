@@ -1,37 +1,18 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 
-import {BookType, CategoriesType, CurrentBookType, libraryApi} from '../api/library-api';
+import {
+    BookType,
+    CategoriesType,
+    CommentsPost,
+    CurrentBookType, HistoriesPost,
+    imageBook,
+    libraryApi
+} from '../api/library-api';
 import {setError, setIsFetching} from "./app-slice";
 
 
-// export const booksThunk = createAsyncThunk('books/booksThunk', async (param, thunkAPI) => {
-//     thunkAPI.dispatch(setIsFetching(true))
-//     const res = await libraryApi.getBooks()
-//     try {
-//         return res.data;
-//     } catch (error: any) {
-//         thunkAPI.dispatch(setError(true));
-//     } finally {
-//         thunkAPI.dispatch(setIsFetching(false))
-//     }
-//
-// })
 
-
-
-// export const bookCategoryThunk = createAsyncThunk('books/bookCategoryThunk', async (param,thunkAPI) => {
-//     thunkAPI.dispatch(setIsFetching(true))
-//     const res = await libraryApi.getCategories()
-//     try {
-//         return res.data;
-//     } catch (error: any) {
-//         thunkAPI.dispatch(setError(true));
-//     } finally {
-//         thunkAPI.dispatch(setIsFetching(false))
-//     }
-//
-// })
 
 export const booksAndCategoryThunk=createAsyncThunk('books/booksAndCategoryThunk', async (param,thunkAPI) => {
     thunkAPI.dispatch(setIsFetching(true))
@@ -64,7 +45,44 @@ export const bookThunk = createAsyncThunk('books/bookThunk', async (id: number, 
 
 const initialState = {
 
-    book: {} as CurrentBookType,
+    book: {
+        id: 0 ,
+        title: '',
+        rating:0,
+        issueYear: '',
+        description: '',
+        publish: '',
+        pages: '',
+        cover: '',
+        weight: '',
+        format: '',
+        ISBN: '',
+        producer: '',
+        authors:[],
+        images: [],
+        categories: [],
+        comments:[],
+        booking: {
+            id: 0,
+            order: false,
+            dateOrder:'',
+            customerId: 0,
+            customerFirstName: '',
+            customerLastName: '',
+
+        },
+        delivery: {
+            id:0,
+            handed: false,
+            dateHandedFrom: '',
+            dateHandedTo: '',
+            recipientId: 0,
+            recipientFirstName:'',
+            recipientLastName: '',
+        },
+
+        histories:[]
+    } as CurrentBookType,
     books: [] as BookType[],
     category:[] as CategoriesType[],
 
@@ -81,19 +99,10 @@ export const slice = createSlice({
             state.book = action.payload!;
 
         });
-        // builder.addCase(booksThunk.fulfilled, (state, action) => {
-        //     state.books = action.payload!;
-        // });
-        //
-        // builder.addCase(bookCategoryThunk.fulfilled, (state, action) => {
-        //     state.category = action.payload!;
-        //
-        // });
+
         builder.addCase(booksAndCategoryThunk.fulfilled, (state, action) => {
             state.category = action.payload![0];
-            debugger
             state.books = action.payload![1];
-            debugger
 
         });
 
