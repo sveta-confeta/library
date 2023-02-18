@@ -7,12 +7,17 @@ const initialState={
     status:'init' as StatusType,
     error:false,
     isFetching:false,
+    showNavbar:false,
 }
 
 export const slice=createSlice({
     name:'app',
     initialState,
     reducers:{
+        setShowNavbar(state,action:PayloadAction<boolean>){
+            state.showNavbar=action.payload
+        },
+
         setMenuActive(state,action:PayloadAction<boolean>){
             state.menuActive=action.payload
         },
@@ -30,4 +35,4 @@ export const slice=createSlice({
 })
 
 export const appSlice=slice.reducer;
-export const {setMenuActive,setStatus,setIsFetching,setError} = slice.actions;
+export const {setMenuActive,setStatus,setIsFetching,setError,setShowNavbar} = slice.actions;

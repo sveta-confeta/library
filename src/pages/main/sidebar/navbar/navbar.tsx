@@ -14,11 +14,8 @@ type NavbarType={
 
 export const Navbar = (props:NavbarType) => {
     const genresOfBooks=useAppSelector(state=>state.book.category)
-    const dispatch=useAppDispatch();
-    // useEffect(()=>{
-    //     dispatch(bookCategoryThunk())
-    //
-    // },[])
+
+
     return(
         <nav className={props.showNavbar ?  s.activeShowNavbar  : s.navbar}>
 

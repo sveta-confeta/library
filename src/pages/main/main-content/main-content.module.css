@@ -5,6 +5,7 @@
   grid-template-columns:repeat(4, 190px);
   column-gap:21.5px;
   row-gap:24px;
+  margin-bottom:62px;
 }
 .inlineBookList{
   grid-area:main;
@@ -16,7 +17,7 @@
 .cardBook {
   box-shadow:var(--shadow-btn);
   padding:8px 8px 16px;
-  min-height:470px;
+  height:470px;
   border-radius:10px;
   display:flex;
   flex-direction:column;
@@ -79,13 +80,18 @@
 
 }
 .titleBook {
-  min-height:54px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
   font-weight:600;
   font-size:14px;
   line-height:18px;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:174px;
+  height:54px;
+  margin-bottom:8px;
+
 
 }
 .inlineTitleBook {
@@ -94,6 +100,13 @@
   font-size:22px;
   line-height:32px;
   grid-area:t;
+  max-width:649px;
+  height:60px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  text-overflow:ellipsis;
 
 }
 .author {

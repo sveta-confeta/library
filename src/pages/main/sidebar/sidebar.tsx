@@ -4,7 +4,7 @@ import {NavLink, useLocation} from 'react-router-dom';
 import arrowBottom from '../../../assets/stroke-bottom.svg'
 import arrowTop from '../../../assets/stroke-top.svg'
 import {useAppDispatch, useAppSelector} from '../../../redux/redux-store';
-import {setMenuActive} from '../../../slices/app-slice';
+import {setMenuActive, setShowNavbar} from '../../../slices/app-slice';
 
 import {Navbar} from './navbar/navbar';
 
@@ -15,7 +15,8 @@ export const Sidebar = () => {
 
     const menuRef = useRef<HTMLInputElement | null>(null)
     const activeMenu = useAppSelector<boolean>(state => state.app.menuActive);
-    const [showNavbar, setShowNavbar] = useState(true);
+    // const [showNavbar, setShowNavbar] = useState(true);
+    const showNavbar=useAppSelector<boolean>(state => state.app.showNavbar);
     const[mobVersion,setMobVersion]=useState(false)
     const location = useLocation();
 
@@ -37,7 +38,7 @@ export const Sidebar = () => {
 
     const currentState = findUrl(location.pathname, 'books');
     const showNavbarHandler = () => {
-        setShowNavbar(!showNavbar)
+        dispatch(setShowNavbar(!showNavbar))
     }
 
     const handlerMenuOutside = (event:MouseEvent | TouchEvent) => {

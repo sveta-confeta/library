@@ -9,7 +9,7 @@ import {
     imageBook,
     libraryApi
 } from '../api/library-api';
-import {setError, setIsFetching} from "./app-slice";
+import {setError, setIsFetching, setShowNavbar} from "./app-slice";
 
 
 
@@ -20,10 +20,12 @@ export const booksAndCategoryThunk=createAsyncThunk('books/booksAndCategoryThunk
     const res2 = await libraryApi.getBooks()
     try {
         return Promise.all([res.data,res2.data])
+
     } catch (error: any) {
         thunkAPI.dispatch(setError(true));
     } finally {
-        thunkAPI.dispatch(setIsFetching(false))
+        thunkAPI.dispatch(setIsFetching(false)),
+            thunkAPI.dispatch(setShowNavbar(true))
     }
 
 })

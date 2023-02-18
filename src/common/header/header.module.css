@@ -1,9 +1,10 @@
 .header {
   display:flex;
   align-items:center;
-  height:58px;
+  height:90px;
   max-width:1110px;
-  margin:32px auto 0 auto;
+  margin:0 auto;
+  padding-top:32px;
 }
 .title {
   font-weight:700;
@@ -86,7 +87,7 @@
 
 @media (max-width:1140px) {
   .header {
-    padding:0 64px;
+    padding:32px 64px 0 64px;
   }
   .btn {
     display:none;
@@ -104,7 +105,7 @@
 @media (max-width:768px) {
   .header {
     height:auto;
-    margin:32px auto 22px auto;
+    margin:0 auto 22px auto;
   }
   .avatarWrapper {
     display:none;
@@ -113,7 +114,7 @@
 
 @media (max-width:650px) {
   .header {
-    padding:0 16px;
+    padding:32px 0 16px 0;
   }
 }
 
@@ -126,7 +127,8 @@
 
 @media (max-width:400px) {
   .header{
-    margin:24px auto 24px auto;
+    margin:0 auto 24px auto;
+    padding-top:24px;
   }
   .title {
     font-size:18px;

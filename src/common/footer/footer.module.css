@@ -1,9 +1,14 @@
 .footer{
-  max-width:1110px;
-  margin:0 auto;
+
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
 
 }
 .footerWrapper{
+  margin:0 auto;
+  max-width:1110px;
   border-top:1px solid #BFC4C9;
   padding:16px 0;
   display:flex;
@@ -39,19 +44,19 @@
 }
 @media (max-width:650px) {
   .footer{
-    padding: 0 16px;
+    padding:0 16px;
   }
-    .law{
-        margin-bottom: 16px;
-    }
+  .law{
+    margin-bottom:16px;
+  }
 }
 @media (max-width:400px) {
-    .footerWrapper{
-        padding: 16px 0 8px 0;
-    }
-    .law {
-        font-size: 15px;
-        line-height: 20px;
-    }
+  .footerWrapper{
+    padding:16px 0 8px 0;
+  }
+  .law {
+    font-size:15px;
+    line-height:20px;
+  }
 }
 

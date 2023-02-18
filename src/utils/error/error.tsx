@@ -1,8 +1,11 @@
 import React from 'react';
 import s from './Error.module.css'
+import {setError} from "../../slices/app-slice";
+import {useAppDispatch} from "../../redux/redux-store";
 
 
 export const Error = () => {
+    const dispatch = useAppDispatch();
     return (
 
 
@@ -24,8 +27,7 @@ export const Error = () => {
                 <p className={s.wornText}>Что-то пошло не
                     так. Обновите страницу через некоторое время.</p>
             </div>
-            <svg className={s.close} onClick={() => {
-            }} width="24" height="24" viewBox="0 0 24 24" fill="none"
+            <svg className={s.close} onClick={() => dispatch(setError(false))} width="24" height="24" viewBox="0 0 24 24" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd"
                       d="M18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289Z"
