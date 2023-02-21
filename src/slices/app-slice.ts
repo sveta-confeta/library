@@ -8,12 +8,20 @@ const initialState={
     error:false,
     isFetching:false,
     showNavbar:false,
+    filter:'all',
+    counterBooks: 10,
 }
 
 export const slice=createSlice({
     name:'app',
     initialState,
     reducers:{
+        setCounterBooks(state,action:PayloadAction<number>){
+            state.counterBooks=action.payload
+        },
+        setFilter(state,action:PayloadAction<string>){
+            state.filter=action.payload
+        },
         setShowNavbar(state,action:PayloadAction<boolean>){
             state.showNavbar=action.payload
         },
@@ -35,4 +43,4 @@ export const slice=createSlice({
 })
 
 export const appSlice=slice.reducer;
-export const {setMenuActive,setStatus,setIsFetching,setError,setShowNavbar} = slice.actions;
+export const {setMenuActive,setStatus,setIsFetching,setError,setShowNavbar,setFilter,setCounterBooks} = slice.actions;

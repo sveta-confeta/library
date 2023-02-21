@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useParams} from 'react-router-dom';
 
 import defaultImg from '../../../assets/default-image .jpg'
 import {Button} from '../../../common/button/button';
@@ -12,17 +12,31 @@ import s from './main-content.module.css'
 import {imageBook} from "../../../api/library-api";
 import {Preloader} from "../../../utils/Preloader";
 import {Error} from "../../../utils/error/error";
+import {setCounterBooks} from "../../../slices/app-slice";
 
 
 
 export const MainContent = () => {
+    const dispatch=useAppDispatch();
+
+
     const [btnToggleBlock, setBtnToggleBlock] = useState(true)
     const [btnToggleList, setBtnToggleList] = useState(false)
+
 
     const books=useAppSelector((state)=>state.book.books)
     const isFetching=useAppSelector(state=> state.app.isFetching)
     const errorFlag=useAppSelector(state=>state.app.error)
     const categories=useAppSelector(state =>state.book.category)
+    const filter=useAppSelector(state => state.app.filter)
+    console.log(window.location.href)
+
+    // let countBook=0;
+
+    let booksFilter= filter==="all" ? books : books.filter((m) => filter===m.categories[0]) //фильтрация books
+
+
+
 
     return (
         <React.Fragment>
@@ -31,7 +45,7 @@ export const MainContent = () => {
                       btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock}/>
             {isFetching && <Preloader/> }
                 <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
-                    { books.map(m =>{
+                    { booksFilter.map(m =>{
                             return(
                                 <NavLink key={m.id} to={`/books/${categories.find(f=> f.name === m.categories[0])?.path}/${m.id}`}  >
                                     <div className={btnToggleList ? s.inlineCardBook : s.cardBook}

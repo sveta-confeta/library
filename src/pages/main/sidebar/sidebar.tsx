@@ -15,22 +15,12 @@ export const Sidebar = () => {
 
     const menuRef = useRef<HTMLInputElement | null>(null)
     const activeMenu = useAppSelector<boolean>(state => state.app.menuActive);
-    // const [showNavbar, setShowNavbar] = useState(true);
     const showNavbar=useAppSelector<boolean>(state => state.app.showNavbar);
-    const[mobVersion,setMobVersion]=useState(false)
+
     const location = useLocation();
 
-    const handleResize = () => {
-        if (window.innerWidth < 1140) {
-            setMobVersion(true)
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
 
 
-    },[])
 
     function findUrl(str: string, p: string) {
         return str.includes(p)
@@ -48,9 +38,7 @@ export const Sidebar = () => {
 
     };
 
-    const handlerMenu=()=>{
-        dispatch(setMenuActive(false));
-    }
+
 
     useEffect(()=>{
 
@@ -63,9 +51,9 @@ export const Sidebar = () => {
 
 
         return (
-            <div data-test-id='burger-navigation' ref={menuRef} className={`${s.menu} ${activeMenu ? s.activeMenu : ''}`} >
+            <div  ref={menuRef} className={`${s.menu} ${activeMenu ? s.activeMenu : ''}`} >
                 <div className={s.wrapperMenu}>
-                    <div  className={s.wrap}  ><NavLink data-test-id={mobVersion ? 'burger-showcase' :'navigation-showcase'}  to='/books/all'
+                    <div  className={s.wrap}  ><NavLink  to='/books/all'
 
                                                      className={currentState ? s.active : s.menuTitle}>
                         Витрина книг </NavLink >
@@ -77,7 +65,7 @@ export const Sidebar = () => {
                         }
                     </div>
 
-                    <Navbar handlerMenu={handlerMenu} showNavbar={showNavbar} mobVersion={mobVersion}/>
+                    <Navbar  showNavbar={showNavbar} />
 
                     <NavLink data-test-id='burger-terms' to='/terms'
                              className={({isActive}) => isActive ? s.activeDocument : s.document}>Правила
