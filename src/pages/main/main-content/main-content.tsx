@@ -1,23 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {NavLink, useParams} from 'react-router-dom';
+import {NavLink, useLocation, useParams} from 'react-router-dom';
 
 import defaultImg from '../../../assets/default-image .jpg'
 import {Button} from '../../../common/button/button';
 import {Raiting} from '../../../common/raiting/raiting';
-import {useAppDispatch, useAppSelector} from '../../../redux/redux-store';
+import {useAppSelector} from '../../../redux/redux-store';
 
 import {Settings} from '../settings/settings';
 
 import s from './main-content.module.css'
-import {imageBook} from "../../../api/library-api";
 import {Preloader} from "../../../utils/Preloader";
 import {Error} from "../../../utils/error/error";
-import {setCounterBooks} from "../../../slices/app-slice";
+
 
 
 
 export const MainContent = () => {
-    const dispatch=useAppDispatch();
+    const location = useLocation();
 
 
     const [btnToggleBlock, setBtnToggleBlock] = useState(true)
@@ -29,11 +28,14 @@ export const MainContent = () => {
     const errorFlag=useAppSelector(state=>state.app.error)
     const categories=useAppSelector(state =>state.book.category)
     const filter=useAppSelector(state => state.app.filter)
-    console.log(window.location.href)
 
-    // let countBook=0;
+    function findUrl(str: string, p: string) {
+        return str.includes(p)   //функция ищет совпадения фрагмента в строке
+    }
 
-    let booksFilter= filter==="all" ? books : books.filter((m) => filter===m.categories[0]) //фильтрация books
+    const allPage = findUrl(location.pathname, 'all') //вместо строки вставляем url и ещем в url фрагмент "all" -если находит то тру
+
+    let booksFilter=  allPage ? books : books.filter((m) => filter===m.categories[0]) //фильтрация books
 
 
 

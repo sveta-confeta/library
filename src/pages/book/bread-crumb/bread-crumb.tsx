@@ -1,15 +1,24 @@
 import React from 'react';
 
  import s from './bread-crumb.module.css'
+import {useParams} from "react-router-dom";
+import {CurrentBookType} from "../../../api/library-api";
 
-export const BreadCrumb = () => (
-        <div className={s.breadcrumbContainer}>
-            <ul className={s.breadcrumb}>
-                <li><a href="#">Бизнес книги&nbsp; /</a></li>
-                <li><a href="#"> &nbsp; Грокаем алгоритмы. Иллюстрированное пособие для
-                    программистов и
-                    любопытствующих</a></li>
-            </ul>
-        </div>
-    );
+ type BreadCrumbType={
+     book:CurrentBookType
+ }
+
+export const BreadCrumb = (props:BreadCrumbType) =>{
+    const {category}=useParams();
+
+
+     return (
+         <div className={s.breadcrumbContainer}>
+             <ul className={s.breadcrumb}>
+                 <li ><a href="#">Все книги&nbsp; /</a></li>
+                 <li aria-current="page"><a href="#"> &nbsp; {props.book.title}</a></li>
+             </ul>
+         </div>
+     );
+}
 

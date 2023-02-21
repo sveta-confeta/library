@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 
 import {CustomLink} from '../../../../utils/custom-link/custom-link'
 
@@ -14,12 +14,28 @@ type NavbarType={
 export const Navbar = (props:NavbarType) => {
     const genresOfBooks=useAppSelector(state=>state.book.category)
     const books=useAppSelector((state)=>state.book.books)
-    // const counterBooks=useAppSelector(state=> state.app.counterBooks)
-
-    debugger
-
 
     const dispatch=useAppDispatch();
+
+    let countBooks:any={} ; //подсчет количества книг разных жанров
+    for(let book of books){
+        let categories=book.categories[0]
+        if(countBooks[categories]===undefined){
+            countBooks[categories]=1;
+        } else{
+            countBooks[categories]++
+        }
+    }
+   function Count(name:string) {
+       for (let elem in countBooks){
+           if(elem===name)
+               return countBooks[elem]
+       }
+           }
+
+
+
+
 
     const handlerMenu=(name:string)=>{
      dispatch(setFilter(name))
@@ -35,7 +51,7 @@ export const Navbar = (props:NavbarType) => {
 
             <div className={s.navList}>
                 {
-                    genresOfBooks.map( m => <button name={m.name}  onClick={()=>handlerMenu(m.name)} key={m.id} className={s.navListItem}> <CustomLink to={`/books/${m.path}`}>{m.name}</CustomLink><span>{counterBooks}</span> </button>)
+                    genresOfBooks.map( m => <button name={m.name}  onClick={()=>handlerMenu(m.name)} key={m.id} className={s.navListItem}> <CustomLink to={`/books/${m.path}`}>{m.name}</CustomLink><span>{Count(m.name)}</span> </button>)
                 }
             </div>
         </nav>

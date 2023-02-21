@@ -35,7 +35,6 @@ export const BookPage = () => {
 
     useEffect(() => {
             dispatch(bookThunk(Number(id)))
-        debugger
     }, [id])
 
 
@@ -43,7 +42,7 @@ export const BookPage = () => {
 
     return (
         <React.Fragment>
-            <BreadCrumb/>
+            <BreadCrumb  book={ book}/>
             {errorFlag && <Error/>}
             {isFetching && <Preloader/> }
             <section className={s.bookPage}>
@@ -57,8 +56,7 @@ export const BookPage = () => {
                                          src={`https://strapi.cleverland.by${book.images[0].url}`}/> :
 
                                     <BookSlider arrImgs={book.images}/>  }
-                            {/*{book && book.images && book.images.length == 0 ? <img className={s.aloneImg} alt="обложка книги" src={defaultImg}/> : <img className={s.aloneImg} alt="обложка книги"*/}
-                            {/* src={`https://strapi.cleverland.by${book.images[0].url}`}/>}*!/  }*/}
+
                                 </div>
 
 
