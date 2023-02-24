@@ -1,23 +1,29 @@
 import React from 'react';
 
  import s from './bread-crumb.module.css'
-import {useParams} from "react-router-dom";
+
 import {CurrentBookType} from "../../../api/library-api";
+import {useNavigate} from "react-router-dom";
+
 
  type BreadCrumbType={
+
      book:CurrentBookType
+     from:string
  }
 
 export const BreadCrumb = (props:BreadCrumbType) =>{
-    const {category}=useParams();
+     const navigate=useNavigate()
 
+const goBack=()=> navigate(-1)
 
      return (
+
          <div className={s.breadcrumbContainer}>
-             <ul className={s.breadcrumb}>
-                 <li ><a href="#">Все книги&nbsp; /</a></li>
-                 <li aria-current="page"><a href="#"> &nbsp; {props.book.title}</a></li>
-             </ul>
+             <nav className={s.breadcrumb}>
+                 <div onClick={goBack}>{(props.from==="/books/all") ? 'Все книги' : props.book.categories[0]}&nbsp;/</div>
+                 <div> &nbsp; {props.book.title}</div>
+             </nav>
          </div>
      );
 }

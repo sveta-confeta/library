@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {NavLink, useLocation, useParams} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 import defaultImg from '../../../assets/default-image .jpg'
 import {Button} from '../../../common/button/button';
@@ -48,8 +48,9 @@ export const MainContent = () => {
             {isFetching && <Preloader/> }
                 <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
                     { booksFilter.map(m =>{
-                            return(
-                                <NavLink key={m.id} to={`/books/${categories.find(f=> f.name === m.categories[0])?.path}/${m.id}`}  >
+
+                        return(
+                                <Link key={m.id} to={`/books/${categories.find(f=> f.name === m.categories[0])?.path}/${m.id}`} state = {{ from:location }} >
                                     <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
                                     >
                                         <img src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}
@@ -71,7 +72,7 @@ export const MainContent = () => {
 
 
                                     </div>
-                                </NavLink>
+                                </Link>
                             )
                         }
                     )}

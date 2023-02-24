@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 
 import {BottomIcon} from '../../assets/icon-components/bottom-icon';
 import {TopIcon} from '../../assets/icon-components/top-icon';
@@ -22,6 +22,7 @@ import {Error} from "../../utils/error/error";
 
 
 export const BookPage = () => {
+    const location = useLocation();
     const {id} = useParams();
     const [openReviews, setOpenReviews] = useState(false)
     const dispatch = useAppDispatch();
@@ -29,9 +30,7 @@ export const BookPage = () => {
     const isFetching=useAppSelector(state=> state.app.isFetching)
     const errorFlag=useAppSelector(state=>state.app.error)
 
-
-
-
+    const from=location.state?.from?.pathname //достаем из стейта путь, по которому мы пришли
 
     useEffect(() => {
             dispatch(bookThunk(Number(id)))
@@ -42,7 +41,7 @@ export const BookPage = () => {
 
     return (
         <React.Fragment>
-            <BreadCrumb  book={ book}/>
+            <BreadCrumb book={book} from={from} />
             {errorFlag && <Error/>}
             {isFetching && <Preloader/> }
             <section className={s.bookPage}>
