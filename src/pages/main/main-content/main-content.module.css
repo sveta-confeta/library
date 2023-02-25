@@ -133,9 +133,6 @@
 .inlineBtnCards{
   grid-area:b;
 }
-.filterLight{
-    color:#F83600;
-}
 
 @media (max-width:1140px) {
   .booksList {

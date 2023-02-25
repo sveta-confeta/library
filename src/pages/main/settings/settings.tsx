@@ -7,7 +7,7 @@ import React, {
 
 import {BlockIcon} from '../../../assets/icon-components/block-icon';
 import {ListIcon} from '../../../assets/icon-components/list-icon';
-import IconRait from '../../../assets/icon-rait.svg'
+import IconRait from './icon-rait.svg'
 
 
 import s from './settings.module.css'
@@ -90,13 +90,13 @@ export const Settings = (props: SettingsType) => {
                     className={s.btnName}>По рейтингу</span></button>
             </div>
             <div className={`${s.group} ${searchChange ? s.focus : ''} `}>
-                <button type="button" data-test-id='button-menu-view-window'
+                <button type="button"
                         onClick={blockHandler}
                         className={`${s.btnView} ${props.btnToggleBlock ? s.active : ''}`}>
                     <BlockIcon
                         className={props.btnToggleBlock ? s.btnViewIconActive : s.btnViewIcon}/>
                 </button>
-                <button type="button" onClick={listHandler} data-test-id='button-menu-view-list'
+                <button type="button" onClick={listHandler}
                         className={`${s.btnView} ${props.btnToggleList ? s.active : ''}`}>
                     <ListIcon
                         className={props.btnToggleList ? s.btnViewIconActive : s.btnViewIcon}/>

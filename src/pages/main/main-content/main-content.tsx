@@ -15,6 +15,7 @@ import {Error} from "../../../utils/error/error";
 
 
 
+
 export const MainContent = () => {
     const location = useLocation();
     let [searchParams,setSearchParams]=useSearchParams();
@@ -34,12 +35,14 @@ export const MainContent = () => {
     function findUrl(str: string, p: string) {
         return str.includes(p)   //функция ищет совпадения фрагмента в строке
     }
-
     const allPage = findUrl(location.pathname, 'all') //вместо строки вставляем url и ещем в url фрагмент "all" -если находит то тру
 
     let booksFilter=  allPage ? books : books.filter((m) => filter===m.categories[0]) //фильтрация books
 
-    let searchBooks=booksFilter.filter(book=> book.title.toLowerCase().includes(booksQuery)) //после фильтрации чтоб была возможность поиска
+    // @ts-ignore
+    const ratingBooks=booksFilter.sort((a, b) => b.rating - a.rating); //сортировка по рейтингу
+
+    let searchBooks=ratingBooks.filter(book=> book.title.toLowerCase().includes(booksQuery)) //после фильтрации чтоб была возможность поиска
 
      const highlightTextSearch = (text: string, textSearch: string) => {
 
