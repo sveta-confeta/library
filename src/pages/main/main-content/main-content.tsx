@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import React, {useEffect, useMemo, useState} from 'react';
+import {Link, useLocation, useSearchParams} from 'react-router-dom';
 
 import defaultImg from '../../../assets/default-image .jpg'
 import {Button} from '../../../common/button/button';
@@ -17,6 +17,8 @@ import {Error} from "../../../utils/error/error";
 
 export const MainContent = () => {
     const location = useLocation();
+    let [searchParams,setSearchParams]=useSearchParams();
+    const booksQuery=searchParams.get('book') || ''
 
 
     const [btnToggleBlock, setBtnToggleBlock] = useState(true)
@@ -37,6 +39,27 @@ export const MainContent = () => {
 
     let booksFilter=  allPage ? books : books.filter((m) => filter===m.categories[0]) //фильтрация books
 
+    let searchBooks=booksFilter.filter(book=> book.title.toLowerCase().includes(booksQuery)) //после фильтрации чтоб была возможность поиска
+
+     const highlightTextSearch = (text: string, textSearch: string) => {
+
+        if (textSearch) {
+            const regexp = new RegExp(textSearch || '', 'ig')
+            const search = text.match(regexp)
+
+
+            return search ? text.split(regexp).map((s, index, array) => {
+                    if (index < array.length - 1) {
+                        const c = search.shift()
+                        return <span key={Math.random()}>{s}<span style={{ color: 'rgb(255, 82, 83)' }}>{c}</span></span>
+                    }
+                    return s
+                })
+                : text
+        }
+
+        return text
+    }
 
 
 
@@ -44,10 +67,12 @@ export const MainContent = () => {
         <React.Fragment>
             {errorFlag && <Error/>}
             <Settings btnToggleList={btnToggleList} setBtnToggleList={setBtnToggleList}
-                      btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock}/>
+
+                      btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock} booksQuery={booksQuery}
+                      setSearchParams={setSearchParams} searchParams={searchParams}/>
             {isFetching && <Preloader/> }
                 <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
-                    { booksFilter.map(m =>{
+                    { searchBooks.map(m =>{
 
                         return(
                                 <Link key={m.id} to={`/books/${categories.find(f=> f.name === m.categories[0])?.path}/${m.id}`} state = {{ from:location }} >
@@ -63,7 +88,7 @@ export const MainContent = () => {
                                                 className={btnToggleList ? s.inlineRaitingNone : s.raitingNone}>ещё
                                                 нет оценок</div>}
 
-                                        <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{m.title}</h4>
+                                        <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{highlightTextSearch( m.title, booksQuery)}</h4>
 
                                         <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.authors}, {m.issueYear} </h5>
                                         <Button  onClick={(e:any)=> e.preventDefault()} className={btnToggleList ? s.inlineBtn : ''} btnToggleList={btnToggleList}

@@ -1,17 +1,25 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {
+    ChangeEvent,
+    Dispatch,
+    SetStateAction,
+    useState
+} from 'react';
 
 import {BlockIcon} from '../../../assets/icon-components/block-icon';
 import {ListIcon} from '../../../assets/icon-components/list-icon';
 import IconRait from '../../../assets/icon-rait.svg'
-import IconSearch from '../../../assets/icon-search.svg'
+
 
 import s from './settings.module.css'
 
 type SettingsType = {
+    booksQuery:string
     btnToggleList: boolean
     setBtnToggleList: Dispatch<SetStateAction<boolean>>
     btnToggleBlock: boolean
     setBtnToggleBlock: Dispatch<SetStateAction<boolean>>
+    setSearchParams:any
+    searchParams:any
 }
 
 
@@ -27,22 +35,27 @@ export const Settings = (props: SettingsType) => {
         props.setBtnToggleBlock(false)
 
     }
+    const showInput=()=>{
+         setSearchChange(true)
+    }
+    const searchHandler=(event:ChangeEvent<HTMLInputElement>)=>{
+        const query=event.target.value;
+        props.setSearchParams({book:query})
+
+    }
 
     return (
 
         <section className={s.settings}>
             <div className={s.group}>
                 <div className={s.searchWrapper}>
-                    <input data-test-id='input-search'
-                           className={`${s.search} ${searchChange ? s.focus : ''} `} type="search"
-                           placeholder="Поиск книги или автора…"/>
-                    {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                    {searchChange ? ' ': <button type="button" className={s.searchBtn} />}
-                    <button data-test-id='button-search-open' onClick={() => setSearchChange(true)}
-                            className={`${s.searchIcon} ${searchChange ? s.focus : ''} `}
-                            type="button"><img src={IconSearch} alt="иконка с поиском"/></button>
-                    <button data-test-id='button-search-close'
-                            onClick={() => setSearchChange(false)}
+                    <input
+                           className={`${s.search} ${searchChange ? s.focus : ''} `} type="text" autoFocus autoComplete="off"
+                           placeholder="Поиск книги или автора…" name="search" value={props.booksQuery} onChange={searchHandler}/>
+
+                    {searchChange ? ' ': <button type="button" className={s.searchBtn} onClick={showInput} />}
+
+                    <button onClick={() => setSearchChange(false)}
                             className={`${s.btnSearch} ${searchChange ? s.focus : ''} `}
                             type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
