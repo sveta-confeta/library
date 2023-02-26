@@ -4,13 +4,14 @@ import {Link, useLocation, useSearchParams} from 'react-router-dom';
 import defaultImg from '../../../assets/default-image .jpg'
 import {Button} from '../../../common/button/button';
 import {Raiting} from '../../../common/raiting/raiting';
-import {useAppSelector} from '../../../redux/redux-store';
+import { useAppSelector} from '../../../redux/redux-store';
 
 import {Settings} from '../settings/settings';
 
 import s from './main-content.module.css'
 import {Preloader} from "../../../utils/Preloader";
 import {Error} from "../../../utils/error/error";
+
 
 
 
@@ -25,6 +26,9 @@ export const MainContent = () => {
     const [btnToggleBlock, setBtnToggleBlock] = useState(true)
     const [btnToggleList, setBtnToggleList] = useState(false)
 
+    const [changeRating,setChangeRating]=useState(true)
+
+
 
     const books=useAppSelector((state)=>state.book.books)
     const isFetching=useAppSelector(state=> state.app.isFetching)
@@ -37,12 +41,16 @@ export const MainContent = () => {
     }
     const allPage = findUrl(location.pathname, 'all') //вместо строки вставляем url и ещем в url фрагмент "all" -если находит то тру
 
+
     let booksFilter=  allPage ? books : books.filter((m) => filter===m.categories[0]) //фильтрация books
 
+// @ts-ignore
+    const ratingBooksDown=[...booksFilter].sort((a, b) => b.rating - a.rating); //сортировка по рейтингу (от большего к меньшему)
     // @ts-ignore
-    const ratingBooks=booksFilter.sort((a, b) => b.rating - a.rating); //сортировка по рейтингу
+    const changeRaitingUp=[...booksFilter].sort((a, b) => a.rating - b.rating); //сортировка по рейтингу (от меньшего  к большему)
 
-    let searchBooks=ratingBooks.filter(book=> book.title.toLowerCase().includes(booksQuery)) //после фильтрации чтоб была возможность поиска
+    let searchBooks=  (changeRating ?ratingBooksDown : changeRaitingUp).filter(book=> book.title.toLowerCase().includes(booksQuery))
+
 
      const highlightTextSearch = (text: string, textSearch: string) => {
 
@@ -72,7 +80,7 @@ export const MainContent = () => {
             <Settings btnToggleList={btnToggleList} setBtnToggleList={setBtnToggleList}
 
                       btnToggleBlock={btnToggleBlock} setBtnToggleBlock={setBtnToggleBlock} booksQuery={booksQuery}
-                      setSearchParams={setSearchParams} searchParams={searchParams}/>
+                      setSearchParams={setSearchParams} searchParams={searchParams} changeRating={changeRating} setChangeRating={setChangeRating}/>
             {isFetching && <Preloader/> }
                 <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
                     { searchBooks.map(m =>{

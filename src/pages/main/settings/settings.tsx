@@ -20,6 +20,8 @@ type SettingsType = {
     setBtnToggleBlock: Dispatch<SetStateAction<boolean>>
     setSearchParams:any
     searchParams:any
+    setChangeRating:Dispatch<SetStateAction<boolean>>
+    changeRating:boolean
 }
 
 
@@ -42,6 +44,10 @@ export const Settings = (props: SettingsType) => {
         const query=event.target.value;
         props.setSearchParams({book:query})
 
+    }
+
+    const ratingHandler=()=>{
+        props.setChangeRating(!props.changeRating)
     }
 
     return (
@@ -85,7 +91,7 @@ export const Settings = (props: SettingsType) => {
                     </button>
                 </div>
 
-                <button type="button" className={`${s.sort} ${searchChange ? s.focus : ''} `}><img
+                <button  onClick={ratingHandler} type="button" className={`${s.sort} ${searchChange ? s.focus : ''} `}><img
                     className={s.sortIcon} src={IconRait} alt="иконка со списком"/><span
                     className={s.btnName}>По рейтингу</span></button>
             </div>

@@ -12,7 +12,6 @@ import {useAppDispatch} from "../../redux/redux-store";
 export const LayoutMainPage = () => {
     const dispatch=useAppDispatch();
     useEffect(()=>{
-        // dispatch(booksThunk())
         dispatch(booksAndCategoryThunk())
 
     },[dispatch])

@@ -59,6 +59,7 @@
   width:150px;
   transition:0.2s;
   cursor:pointer;
+  outline:none;
 }
 .sortIcon {
   top:12px;
