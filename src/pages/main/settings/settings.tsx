@@ -7,7 +7,8 @@ import React, {
 
 import {BlockIcon} from '../../../assets/icon-components/block-icon';
 import {ListIcon} from '../../../assets/icon-components/list-icon';
-import IconRait from './icon-rait.svg'
+import IconRaitDown from './icon-rait.svg'
+import IconRaitUp from './listUp.svg'
 
 
 import s from './settings.module.css'
@@ -92,7 +93,7 @@ export const Settings = (props: SettingsType) => {
                 </div>
 
                 <button  onClick={ratingHandler} type="button" className={`${s.sort} ${searchChange ? s.focus : ''} `}><img
-                    className={s.sortIcon} src={IconRait} alt="иконка со списком"/><span
+                    className={s.sortIcon} src={props.changeRating ? IconRaitDown : IconRaitUp} alt="иконка со списком"/><span
                     className={s.btnName}>По рейтингу</span></button>
             </div>
             <div className={`${s.group} ${searchChange ? s.focus : ''} `}>

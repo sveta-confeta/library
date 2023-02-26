@@ -6,6 +6,7 @@
   column-gap:21.5px;
   row-gap:24px;
   margin-bottom:62px;
+  position:relative;
 }
 .inlineBookList{
   grid-area:main;
@@ -133,7 +134,18 @@
 .inlineBtnCards{
   grid-area:b;
 }
-
+.textToNever{
+  position:absolute;
+  top:200px;
+  left:50%;
+    text-align: center;
+  transform:translateX(-50%);
+  width:825px;
+  font-weight:700;
+  font-size:32px;
+  line-height:40px;
+  color:#A7A7A7;
+}
 @media (max-width:1140px) {
   .booksList {
     grid-template-columns:repeat(auto-fill,minmax(190px, 1fr));
