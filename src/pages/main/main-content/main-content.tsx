@@ -1,19 +1,22 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useSearchParams} from 'react-router-dom';
 
 import defaultImg from '../../../assets/default-image .jpg'
 import {Button} from '../../../common/button/button';
 import {Raiting} from '../../../common/raiting/raiting';
-import {useAppSelector} from '../../../redux/redux-store';
+import {useAppDispatch, useAppSelector} from '../../../redux/redux-store';
 
 import {Settings} from '../settings/settings';
 
 import s from './main-content.module.css'
 import {Preloader} from "../../../utils/Preloader";
 import {Error} from "../../../utils/error/error";
+import {booksThunk} from "../../../slices/book-slicer";
 
 
 export const MainContent = () => {
+    const dispatch = useAppDispatch();
+
     const location = useLocation();
     let [searchParams, setSearchParams] = useSearchParams();
     const booksQuery = searchParams.get('book') || ''
@@ -46,10 +49,13 @@ export const MainContent = () => {
     const changeRaitingUp = [...booksFilter].sort((a, b) => a.rating - b.rating); //сортировка по рейтингу (от меньшего  к большему)
 
     let searchBooks = (changeRating ? ratingBooksDown : changeRaitingUp).filter(book => book.title.toLowerCase().includes(booksQuery))
-    debugger
 
+    useEffect(() => {
+        dispatch(booksThunk())
+        console.log('ffff')
+    },[])
 
-    const highlightTextSearch = (text: string, textSearch: string) => {
+    const highlightTextSearch = (text: string, textSearch: string) => { //функция подсветки текста
 
         if (textSearch) {
             const regexp = new RegExp(textSearch || '', 'ig')
@@ -82,40 +88,40 @@ export const MainContent = () => {
                       changeRating={changeRating} setChangeRating={setChangeRating}/>
             {isFetching && <Preloader/>}
             <main className={`${btnToggleList ? s.inlineBookList : s.booksList}`}>
-                {searchBooks.length !==0
+                {searchBooks.length !== 0
                     ? searchBooks.map(m => {
 
-                        return (
-                            <Link key={m.id}
-                                  to={`/books/${categories.find(f => f.name === m.categories[0])?.path}/${m.id}`}
-                                  state={{from: location}}>
-                                <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
-                                >
-                                    <img
-                                        src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}
+                            return (
+                                <Link key={m.id}
+                                      to={`/books/${categories.find(f => f.name === m.categories[0])?.path}/${m.id}`}
+                                      state={{from: location}}>
+                                    <div className={btnToggleList ? s.inlineCardBook : s.cardBook}
+                                    >
+                                        <img
+                                            src={m.image ? `https://strapi.cleverland.by${m.image.url}` : defaultImg}
 
-                                        className={btnToggleList ? s.inlineCoverBook : s.coverBook}/>
-                                    {m.rating ?
-                                        <Raiting className={btnToggleList ? s.inlineRaiting : ''}
-                                                 value={m.rating}/> :
-                                        <div
-                                            className={btnToggleList ? s.inlineRaitingNone : s.raitingNone}>ещё
-                                            нет оценок</div>}
+                                            className={btnToggleList ? s.inlineCoverBook : s.coverBook}/>
+                                        {m.rating ?
+                                            <Raiting className={btnToggleList ? s.inlineRaiting : ''}
+                                                     value={m.rating}/> :
+                                            <div
+                                                className={btnToggleList ? s.inlineRaitingNone : s.raitingNone}>ещё
+                                                нет оценок</div>}
 
-                                    <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{highlightTextSearch(m.title, booksQuery)}</h4>
+                                        <h4 className={`${btnToggleList ? s.inlineTitleBook : s.titleBook}`}>{highlightTextSearch(m.title, booksQuery)}</h4>
 
-                                    <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.authors}, {m.issueYear} </h5>
-                                    <Button onClick={(e: any) => e.preventDefault()}
-                                            className={btnToggleList ? s.inlineBtn : ''}
-                                            btnToggleList={btnToggleList}
-                                            name={m.booking ? "Забронирован" : "" || m.delivery ? `Занята до ${m.delivery?.dateHandedFrom}` : "" || 'Забронировать'}/>
+                                        <h5 className={btnToggleList ? s.inlineAuthor : s.author}>{m.authors}, {m.issueYear} </h5>
+                                        <Button onClick={(e: any) => e.preventDefault()}
+                                                className={btnToggleList ? s.inlineBtn : ''}
+                                                btnToggleList={btnToggleList}
+                                                name={m.booking ? "Забронирован" : "" || m.delivery ? `Занята до ${m.delivery?.dateHandedFrom}` : "" || 'Забронировать'}/>
 
 
-                                </div>
-                            </Link>
-                        )
-                    }
-                ) :  <div className={s.textToNever}>По запросу ничего не найдено</div>
+                                    </div>
+                                </Link>
+                            )
+                        }
+                    ) : <div className={s.textToNever}>По запросу ничего не найдено</div>
                 }
 
             </main>
