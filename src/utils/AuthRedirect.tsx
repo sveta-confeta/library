@@ -8,7 +8,7 @@ type PropsType = {
 }
 
 export const AuthRedirect: FC<PropsType> = ({children}) => {
-    // const isAuth = useAppSelector(state => state.auth.isAuth);
+    // const isAuth = useAppSelector(state => state.registration.isAuth);
     return <>
         {/*{!isAuth ? <Navigate to={`/login`}/> : children}*/}
     </>

@@ -9,22 +9,24 @@ import {MainContent} from './pages/main/main-content/main-content';
 import {Terms} from './pages/main/terms-of-use/terms-of-use';
 
 import './app.css';
+import {Registration} from "./pages/registration/registration";
 
 export function App() {
     return (
         <div className="app">
             <HashRouter>
                 <Routes>
-                    <Route path='/' element={<Layout/>}>
-                        <Route element={<LayoutMainPage/>}>
-                            <Route path='/' element={<Navigate to='/books/all' replace={true}/>}/>
-                            <Route path='books/:category' element={<MainContent/>}/>
-                            <Route path='terms' element={<Terms/>}/>
-                            <Route path='contract' element={<Contract/>}/>
-                            <Route path='profile' element={<Contract/>}/>
-                        </Route>
-                        <Route path='/books/:category/:id' element={<BookPage/>}/>
-                    </Route>
+                    {/*<Route path='/layout' element={<Layout/>}>*/}
+                    {/*    <Route element={<LayoutMainPage/>}>*/}
+                    {/*        <Route path='/' element={<Navigate to='/books/all' replace={true}/>}/>*/}
+                    {/*        <Route path='books/:category' element={<MainContent/>}/>*/}
+                    {/*        <Route path='terms' element={<Terms/>}/>*/}
+                    {/*        <Route path='contract' element={<Contract/>}/>*/}
+                    {/*        <Route path='profile' element={<Contract/>}/>*/}
+                    {/*    </Route>*/}
+                    {/*    <Route path='/books/:category/:id' element={<BookPage/>}/>*/}
+                    {/*</Route>*/}
+                    <Route path='/' element={<Registration/>}/>
                 </Routes>
 
             </HashRouter>

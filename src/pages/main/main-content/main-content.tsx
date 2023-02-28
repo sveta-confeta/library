@@ -51,8 +51,7 @@ export const MainContent = () => {
     let searchBooks = (changeRating ? ratingBooksDown : changeRaitingUp).filter(book => book.title.toLowerCase().includes(booksQuery))
 
     useEffect(() => {
-        dispatch(booksThunk())
-        console.log('ffff')
+        dispatch(booksThunk())  //когда мы возращаемся из book -происходит повторный запрос за books для обновления актуального списка книг
     },[])
 
     const highlightTextSearch = (text: string, textSearch: string) => { //функция подсветки текста
