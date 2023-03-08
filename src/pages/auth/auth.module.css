@@ -28,12 +28,6 @@
   font-weight:700;
   font-size:24px;
   line-height:30px;
-  margin-bottom:36px;
-}
-.step{
-  font-weight:600;
-  font-size:14px;
-  line-height:18px;
   margin-bottom:32px;
 }
 .input{
@@ -43,8 +37,19 @@
   border-bottom:1px solid  #BFC4C9;
   background:#F9F9FA;
   border-radius:4px;
-  margin-bottom:36px;
   padding:19px 12px;
+}
+.first{
+  margin-bottom:36px;
+}
+.second{
+  margin-bottom:20px;
+}
+.forgot{
+  font-weight:500;
+  font-size:12px;
+  line-height:16px;
+  color:#A7A7A7;
 }
 .btnRegistr{
   width:100%;

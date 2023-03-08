@@ -10,6 +10,7 @@ import {Terms} from './pages/main/terms-of-use/terms-of-use';
 
 import './app.css';
 import {Registration} from "./pages/registration/registration";
+import {Auth} from "./pages/auth/auth";
 
 export function App() {
     return (
@@ -26,7 +27,11 @@ export function App() {
                     {/*    </Route>*/}
                     {/*    <Route path='/books/:category/:id' element={<BookPage/>}/>*/}
                     {/*</Route>*/}
-                    <Route path='/' element={<Registration/>}/>
+                    {/*<Route path='/' element={<Registration/>}/>*/}
+                    <Route path='/' element={<Auth/>}/>
+                    {/*<Route path='/auth' element={<Auth/>}/>*/}
+                    {/*<Route path='/forgot-pass' element={<Forgot/>}/>*/}
+
                 </Routes>
 
             </HashRouter>

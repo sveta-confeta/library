@@ -1,8 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import s from './registration.module.css'
 import {NavLink} from "react-router-dom";
 import arrow from './../../assets/arrow.svg'
 import {useFormik} from "formik";
+import {RegistrThunk} from "../../slices/auth-slice";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../redux/redux-store";
 
 type StepType = "oneStep" | "twoStep" | "threeStep"
 
@@ -17,6 +20,7 @@ export type InitRegType={
 
 export const Registration = () => {
     const [changeStep, setChangeStep] = useState<StepType>("oneStep")
+    const dispatch=useDispatch<AppDispatch>();
 
     const stepHandlerTwo = () => {
         setChangeStep("twoStep")
@@ -39,8 +43,8 @@ export const Registration = () => {
         // validate,
         onSubmit: values => {
             alert(JSON.stringify(values)); //это для теста что все работает)
-            // dispatch(loginTC(values));
-            // formik.resetForm();
+            dispatch(RegistrThunk(values));
+            formik.resetForm();
         },
 
     })
