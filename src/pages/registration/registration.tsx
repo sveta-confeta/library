@@ -101,7 +101,7 @@ export const Registration = () => {
 
                 <div className={s.openWrapper}>
                     <p>Есть учётная запись?</p>
-                    <NavLink className={s.openLink} to={''}><span className={s.open}>войти</span>
+                    <NavLink className={s.openLink} to={'/auth'}><span className={s.open}>войти</span>
                         <img src={arrow} alt={"стрелка"}/></NavLink>
                 </div>
             </div>

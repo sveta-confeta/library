@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./auth.module.css"
 import {NavLink} from "react-router-dom";
 import arrow from "../../assets/arrow.svg";
+import {Forgot} from "../forgot/forgot";
 
 export const Auth = () => {
     return (
@@ -15,7 +16,7 @@ export const Auth = () => {
                            type="text"/>
                     <input className={`${s.input} ${s.second} `} placeholder="Пароль" type="password"
                            name=" password"/>
-                    <p className={s.forgot}>Забыли логин или пароль?</p>
+                    <NavLink to={'/forgot-pass'}  className={s.forgot}>Забыли логин или пароль?</NavLink>
                     <button className={s.btnRegistr} >вход
                     </button>
                 </form>
