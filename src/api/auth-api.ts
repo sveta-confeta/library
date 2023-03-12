@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import {InitRegType} from "../pages/registration/registration";
 
 export const instance = axios.create({
-    withCredentials: true,
+    // withCredentials: true,
     baseURL: 'https://strapi.cleverland.by/api/',
     // Authorization:`Bearer ${jwt}`,
 })
@@ -20,16 +20,17 @@ export const instance = axios.create({
 
 export const authApi = {
     registrUser(data: InitRegType) {
-        return instance.post<RegistrUserType>(`auth/local/register`,data)
+        return instance.post<ResponseType,AxiosResponse<ResponseType>>(`auth/local/register`,data)
+        debugger
     },
     authUser(data:AuthType){
-        return instance.post<RegistrUserType>(`auth/local`)
+        return instance.post<ResponseType>(`auth/local`)
     },
     logoutPassword(data:logoutType){
         return instance.post<LogoutReturnType>(`auth/forgot-password`)
     },
     forgotPassword(data: forgotType){
-        return instance.post<RegistrUserType>(`auth/reset-password`)
+        return instance.post<ResponseType>(`auth/reset-password`)
    }
 
 }
@@ -65,7 +66,7 @@ export type forgotType= {
 
 
 
-export type RegistrUserType = {
+export type ResponseType = {
     jwt: string
     user: AuthUserType
 }

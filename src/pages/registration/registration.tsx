@@ -3,9 +3,10 @@ import s from './registration.module.css'
 import {NavLink} from "react-router-dom";
 import arrow from './../../assets/arrow.svg'
 import {useFormik} from "formik";
-import {RegistrThunk} from "../../slices/auth-slice";
+
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../redux/redux-store";
+import {RegistrThunk} from "../../slices/auth-slice";
 
 type StepType = "oneStep" | "twoStep" | "threeStep"
 
@@ -18,9 +19,16 @@ export type InitRegType={
     email: string
 }
 
+type FormikErrorType = {
+    email?: string
+    password?: string
+    rememberMe?: boolean
+}
+
 export const Registration = () => {
     const [changeStep, setChangeStep] = useState<StepType>("oneStep")
     const dispatch=useDispatch<AppDispatch>();
+
 
     const stepHandlerTwo = () => {
         setChangeStep("twoStep")
@@ -29,6 +37,22 @@ export const Registration = () => {
         setChangeStep("threeStep")
     }
 
+    const validate = (values:InitRegType) => {
+        const errors: FormikErrorType= {};
+
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
+        if (!values.password) {
+            errors.password = 'Required';
+        } else if (values.password.length <=3) {
+            errors.password = 'symbol of password should > 3';
+        }
+
+        return errors;
+    };
 
     const formik = useFormik({
 
@@ -40,14 +64,16 @@ export const Registration = () => {
             phone: '',
             email: '',
         },
-        // validate,
+         validate,
         onSubmit: values => {
-            alert(JSON.stringify(values)); //это для теста что все работает)
+            // alert(JSON.stringify(values)); //это для теста что все работает)
             dispatch(RegistrThunk(values));
-            formik.resetForm();
+            debugger
+            // formik.resetForm();
         },
 
     })
+
     return (
         <div className={s.wrapper}>
             <div className={s.card}>
@@ -57,13 +83,13 @@ export const Registration = () => {
                     (changeStep === "oneStep") &&
                     <>
                         <p className={s.step}>1 шаг из 3</p>
-                        <form>
+                        <form onSubmit={formik.handleSubmit}>
                             <input className={s.input} placeholder="Придумайте логин для входа"
-                                   name=" username"
+                                   {...formik.getFieldProps('username')}
                                    type="text"/>
                             <input className={s.input} placeholder="Пароль" type="password"
-                                   name=" password"/>
-                            <button className={s.btnRegistr} onClick={stepHandlerTwo}>следующий
+                                   {...formik.getFieldProps('password')}/>
+                            <button type="button" className={s.btnRegistr} onClick={stepHandlerTwo}>следующий
                                 шаг
                             </button>
                         </form>
@@ -73,12 +99,11 @@ export const Registration = () => {
                     changeStep === "twoStep" &&
                     <>
                         <p className={s.step}>2 шаг из 3</p>
-                        <form>
-                            <input className={s.input} placeholder="Имя" name="firstName"
+                        <form onSubmit={formik.handleSubmit}>
+                            <input className={s.input} placeholder="Имя" {...formik.getFieldProps('firstName')}
                                    type="text"/>
-                            <input className={s.input} placeholder="Фамилия" type="text"
-                                   name="lastName"/>
-                            <button className={s.btnRegistr} onClick={stepHandlerThree}>последний
+                            <input className={s.input} placeholder="Фамилия" type="text" {...formik.getFieldProps('lastName')}/>
+                            <button type="button" className={s.btnRegistr} onClick={stepHandlerThree}>последний
                                 шаг
                             </button>
                         </form>
@@ -89,11 +114,11 @@ export const Registration = () => {
                     <>
                         <p className={s.step}>3 шаг из 3</p>
                         <form onSubmit={formik.handleSubmit}>
-                            <input className={s.input} placeholder="Номер телефона" name="phone"
-                                   type="number"/>
+                            <input  className={s.input} placeholder="Номер телефона"  {...formik.getFieldProps('phone')}
+                                   type="text"/>
                             <input className={s.input} placeholder="E-mail" type="email"
-                                   name="email"/>
-                            <button className={s.btnRegistr}>зарегистрироваться</button>
+                                   {...formik.getFieldProps('email')}/>
+                            <button type='submit' className={s.btnRegistr}>зарегистрироваться</button>
                         </form>
                     </>
                 }
